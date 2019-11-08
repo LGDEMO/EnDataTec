@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ligang.springboot</groupId>
-    <artifactId>EnDataTec</artifactId>
+    <artifactId>MybatisTest</artifactId>
     <version>1.0.0</version>
 
     <!--继承springboot的父级项目的依赖-->

@@ -25,4 +25,9 @@ public class UserController {
     public  Object update() {
         return userService.Update();
     }
+
+    @GetMapping("/boot/delete")
+    public  Object delete() {
+        return userService.Update();
+    }
 }
