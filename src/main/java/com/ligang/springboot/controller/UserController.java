@@ -3,6 +3,7 @@ package com.ligang.springboot.controller;
 
 import com.ligang.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,5 +19,10 @@ public class UserController {
     @GetMapping("/boot/user")
     public  Object user(){
         return userService.getAllUser();
+    }
+
+    @GetMapping("/boot/update")
+    public  Object update() {
+        return userService.Update();
     }
 }
