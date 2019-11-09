@@ -14,5 +14,5 @@ import java.util.Map;
 public interface UserService {
     public List<User>  getAllUser();
     public  int  Update();
-    public User login(@Param("userName") String userName, @Param("password") String  password);
+    public User login(User user);
 }

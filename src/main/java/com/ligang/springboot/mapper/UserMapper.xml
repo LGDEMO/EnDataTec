@@ -21,7 +21,8 @@
 
 <!--登录实现-->
   <select id="login" parameterType="com.ligang.springboot.model.User" resultMap="BaseResultMap">
-    select  t.user_name,t.password
+    select
+    <include refid="Base_Column_List" />
     from user t where t.user_name =#{userName,jdbcType=VARCHAR} and t.password = #{password,jdbcType=VARCHAR}
   </select>
 

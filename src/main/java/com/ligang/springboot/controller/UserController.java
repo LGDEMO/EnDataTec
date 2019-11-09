@@ -25,8 +25,10 @@ public class UserController {
 
     @PostMapping("boot/login")
    public User  login(@RequestParam(value="userName") String userName,@RequestParam(value="password") String password){
-        User resultUser = (User) userService.login(userName,password);
         User user = new  User();
+        user.setUserName(userName);
+        user.setPassword(password);
+        User resultUser = (User) userService.login(user);
        if(resultUser == null){
        /*    request.setAttribute("user",user);
            request.setAttribute("errorMsg","用户名或则密码错误");*/

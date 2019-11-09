@@ -19,6 +19,10 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
-    Map<String,String> login(String userName, String password);
+
+    Map<String, String> login(String userName, String password);
+
     List<User> getAllUser();
+
+    User login(User user);
 }

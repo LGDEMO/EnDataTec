@@ -5,7 +5,6 @@ import com.ligang.springboot.model.User;
 import com.ligang.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -38,8 +37,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User login(String userName, String  password) {
-        User  user  = (User) userMapper.login(userName,password);
-        return user;
+    public User login(User  user) {
+        User  list =  userMapper.login(user);
+        return list;
     }
 }
