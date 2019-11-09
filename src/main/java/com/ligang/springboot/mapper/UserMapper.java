@@ -4,6 +4,7 @@ import com.ligang.springboot.model.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface UserMapper {
@@ -18,5 +19,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+    Map<String,String> login(String userName, String password);
     List<User> getAllUser();
 }

@@ -1,6 +1,5 @@
 package com.ligang.springboot.service.impl;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import com.ligang.springboot.mapper.UserMapper;
 import com.ligang.springboot.model.User;
 import com.ligang.springboot.service.UserService;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author ligang
@@ -25,19 +25,21 @@ public class UserServiceImpl implements UserService {
         return userMapper.getAllUser();
     }
 
-    @Transactional
     @Override
     public int Update() {
         User user  = new  User();
-        user.setUserid(1);
-        user.setUserName("entreated");
-        user.setPassword("123");
-       int number =   userMapper.updateByPrimaryKeySelective(user);
+        user.setUserid(3);
+        user.setUserName("zyc");
+        user.setPassword("123456");
+        int number =   userMapper.updateByPrimaryKeySelective(user);
         System.out.println("更新的结果："+number);
-
-     /*除数不能为零，所以会抛出一个运行时的异常，有异常更新就会回滚*/
-     /*   int a  = 10 / 0;*/
         return  number;
 
+    }
+
+    @Override
+    public User login(String userName, String  password) {
+        User  user  = (User) userMapper.login(userName,password);
+        return user;
     }
 }
