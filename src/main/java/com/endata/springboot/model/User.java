@@ -1,4 +1,4 @@
-package com.ligang.springboot.model;
+package com.endata.springboot.model;
 
 public class User {
     private Integer userid;

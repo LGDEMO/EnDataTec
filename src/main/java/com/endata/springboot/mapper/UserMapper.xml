@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ligang.springboot.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.ligang.springboot.model.User">
+<mapper namespace="com.endata.springboot.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.endata.springboot.model.User">
     <id column="userId" jdbcType="INTEGER" property="userid" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="password" jdbcType="VARCHAR" property="password" />
@@ -20,7 +20,7 @@
   </select>
 
 <!--登录实现-->
-  <select id="login" parameterType="com.ligang.springboot.model.User" resultMap="BaseResultMap">
+  <select id="login" parameterType="com.endata.springboot.model.User" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from user t where t.user_name =#{userName,jdbcType=VARCHAR} and t.password = #{password,jdbcType=VARCHAR}
@@ -39,14 +39,14 @@
     where userId = #{userid,jdbcType=INTEGER}
   </delete>
 
-  <insert id="insert" parameterType="com.ligang.springboot.model.User">
+  <insert id="insert" parameterType="com.endata.springboot.model.User">
     insert into user (userId, user_name, password
       )
     values (#{userid,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
       )
   </insert>
 
-  <insert id="insertSelective" parameterType="com.ligang.springboot.model.User">
+  <insert id="insertSelective" parameterType="com.endata.springboot.model.User">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userid != null">
@@ -72,7 +72,7 @@
     </trim>
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.ligang.springboot.model.User">
+  <update id="updateByPrimaryKeySelective" parameterType="com.endata.springboot.model.User">
     update user
     <set>
       <if test="userName != null">
@@ -85,7 +85,7 @@
     where userId = #{userid,jdbcType=INTEGER}
   </update>
 
-  <update id="updateByPrimaryKey" parameterType="com.ligang.springboot.model.User">
+  <update id="updateByPrimaryKey" parameterType="com.endata.springboot.model.User">
     update user
     set user_name = #{userName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR}

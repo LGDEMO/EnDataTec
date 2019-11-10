@@ -1,10 +1,8 @@
-package com.ligang.springboot.service;
+package com.endata.springboot.service;
 
-import com.ligang.springboot.model.User;
-import org.apache.ibatis.annotations.Param;
+import com.endata.springboot.model.User;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author ligang

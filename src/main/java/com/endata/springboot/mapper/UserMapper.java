@@ -1,6 +1,6 @@
-package com.ligang.springboot.mapper;
+package com.endata.springboot.mapper;
 
-import com.ligang.springboot.model.User;
+import com.endata.springboot.model.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

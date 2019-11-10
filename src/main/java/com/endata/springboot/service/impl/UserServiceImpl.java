@@ -1,13 +1,12 @@
-package com.ligang.springboot.service.impl;
+package com.endata.springboot.service.impl;
 
-import com.ligang.springboot.mapper.UserMapper;
-import com.ligang.springboot.model.User;
-import com.ligang.springboot.service.UserService;
+import com.endata.springboot.mapper.UserMapper;
+import com.endata.springboot.model.User;
+import com.endata.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author ligang

@@ -1,4 +1,4 @@
-package com.ligang.springboot;
+package com.endata.springboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
