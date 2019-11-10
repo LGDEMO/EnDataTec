@@ -50,7 +50,7 @@ public class UserController {
            return resultMap;
        }
    }
-    @GetMapping("/user/Alluser")
+    @GetMapping("/user/getAllUser")
     public  Object user(){
         return userService.getAllUser();
     }

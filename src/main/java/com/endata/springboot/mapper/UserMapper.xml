@@ -12,14 +12,14 @@
     userId, user_name, password
   </sql>
 
-<!--查询所有用户-->
+  <!--查询所有用户-->
   <select id="getAllUser"  resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from user
   </select>
 
-<!--登录实现-->
+  <!--登录实现-->
   <select id="login" parameterType="com.endata.springboot.model.User" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
@@ -28,7 +28,7 @@
 
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from user
     where userId = #{userid,jdbcType=INTEGER}

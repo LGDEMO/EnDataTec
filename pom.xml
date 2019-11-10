@@ -67,7 +67,6 @@
     <build>
 
         <plugins>
-
             <!--mybatis代码自动生成插件-->
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
@@ -104,7 +103,6 @@
                 </includes>
             </resource>
         </resources>
-
 
     </build>
 
