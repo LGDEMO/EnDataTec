@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -24,22 +25,21 @@ public class UserController {
 
 
     @PostMapping("boot/login")
-   public User  login(@RequestParam(value="userName") String userName,@RequestParam(value="password") String password){
+   public Map  login(@RequestParam(value="userName") String userName,@RequestParam(value="password") String password){
         User user = new  User();
+        Map<String,Object> resultMap = new HashMap<String,Object>();
         user.setUserName(userName);
         user.setPassword(password);
         User resultUser = (User) userService.login(user);
        if(resultUser == null){
-       /*    request.setAttribute("user",user);
-           request.setAttribute("errorMsg","用户名或则密码错误");*/
-           return user;
+           resultMap.put("resultUser",user);
+           resultMap.put("errorMsg","用户名或则密码错误");
+           return resultMap;
        }else{
-         /*  HttpSession session =  request.getSession();
-           session.setAttribute("currentUser",resultUser);*/
-           return user;
-
+           resultMap.put("resultUser",resultUser);
+           resultMap.put("success","登录成功");
+           return resultMap;
        }
-
    }
     @GetMapping("/boot/user")
     public  Object user(){
