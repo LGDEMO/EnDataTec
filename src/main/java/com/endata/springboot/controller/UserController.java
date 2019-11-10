@@ -22,7 +22,7 @@ public class UserController {
     private UserService userService;
 
 
-    @PostMapping("boot/login")
+    @PostMapping("user/login")
    public Map  login(@RequestParam(value="userName") String userName,@RequestParam(value="password") String password){
         User user = new  User();
         Map<String,Object> resultMap = new HashMap<String,Object>();
@@ -39,17 +39,17 @@ public class UserController {
            return resultMap;
        }
    }
-    @GetMapping("/boot/user")
+    @GetMapping("/user/Alluser")
     public  Object user(){
         return userService.getAllUser();
     }
 
-    @GetMapping("/boot/update")
+    @GetMapping("/user/update")
     public  Object update() {
         return userService.Update();
     }
 
-    @GetMapping("/boot/delete")
+    @GetMapping("/user/delete")
     public  Object delete() {
         return userService.Update();
     }
