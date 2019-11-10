@@ -32,7 +32,6 @@ public class UserServiceImpl implements UserService {
         int number =   userMapper.updateByPrimaryKeySelective(user);
         System.out.println("更新的结果："+number);
         return  number;
-
     }
 
     @Override

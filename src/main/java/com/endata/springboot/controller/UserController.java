@@ -4,31 +4,42 @@ package com.endata.springboot.controller;
 import com.endata.springboot.model.User;
 import com.endata.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
+import java.lang.annotation.Retention;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * @author ligang
  * @create 2019-11-08 9:41
+ * 用户管理功能
  */
-@RestController
+@Controller
+@ResponseBody
 public class UserController {
     @Autowired
     private UserService userService;
 
-
     @PostMapping("user/login")
-   public Map  login(@RequestParam(value="userName") String userName,@RequestParam(value="password") String password){
-        User user = new  User();
+   public Map  login( @RequestBody User user){
         Map<String,Object> resultMap = new HashMap<String,Object>();
-        user.setUserName(userName);
-        user.setPassword(password);
-        User resultUser = (User) userService.login(user);
+        String    userName =  user.getUserName();
+        String    password  =user.getPassword();
+        if(userName == null || userName.equals(" ")){
+            resultMap.put("errorMsg","用户名不能为空！！！");//用户名不能为空
+            return resultMap;
+         }else{
+            user.setUserName(userName);
+        }
+        if(password == null || password.equals(" ")){//密码不能为空
+            resultMap.put("errorMsg","密码不能为空！！！");
+            return resultMap;
+        }else{
+            user.setPassword(password);
+        }
+        User resultUser = (User) userService.login(user);//查询数据库对应的用户名和密码
        if(resultUser == null){
            resultMap.put("resultUser",user);
            resultMap.put("errorMsg","用户名或则密码错误");
