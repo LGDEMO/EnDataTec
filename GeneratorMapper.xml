@@ -48,24 +48,24 @@
                enableSelectByExample="false"
                selectByExampleQueryId="false"/>
 
-        <table tableName="addoral_soil"
-               domainObjectName="Addoral_soil"
+        <table tableName="water"
+               domainObjectName="Water"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
                selectByExampleQueryId="false"/>
 
-        <table tableName="addoral_food"
-               domainObjectName="Addoral_food"
+        <table tableName="soil"
+               domainObjectName="Soil"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
                selectByExampleQueryId="false"/>
 
-        <table tableName="adddermal_soil"
-               domainObjectName="Adddermal_soil"
+        <table tableName="air"
+               domainObjectName="Air"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

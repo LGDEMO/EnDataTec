@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.endata.springboot.mapper.SoilMapper">
+  <resultMap id="BaseResultMap" type="com.endata.springboot.model.Soil">
+    <id column="soil_Id" jdbcType="INTEGER" property="soilId" />
+    <result column="Cf" jdbcType="DECIMAL" property="cf" />
+    <result column="IRf" jdbcType="DECIMAL" property="irf" />
+    <result column="EFf" jdbcType="DECIMAL" property="eff" />
+    <result column="ED" jdbcType="DECIMAL" property="ed" />
+    <result column="BW" jdbcType="DECIMAL" property="bw" />
+    <result column="AT" jdbcType="DECIMAL" property="at" />
+    <result column="Cso" jdbcType="DECIMAL" property="cso" />
+    <result column="IRs" jdbcType="DECIMAL" property="irs" />
+    <result column="CF1" jdbcType="DECIMAL" property="cf1" />
+    <result column="EF" jdbcType="DECIMAL" property="ef" />
+    <result column="Cs" jdbcType="DECIMAL" property="cs" />
+    <result column="SAs" jdbcType="DECIMAL" property="sas" />
+    <result column="AF" jdbcType="DECIMAL" property="af" />
+    <result column="ABSd" jdbcType="DECIMAL" property="absd" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    soil_Id, Cf, IRf, EFf, ED, BW, AT, Cso, IRs, CF1, EF, Cs, SAs, AF, ABSd
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from soil
+    where soil_Id = #{soilId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from soil
+    where soil_Id = #{soilId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.endata.springboot.model.Soil">
+    insert into soil (soil_Id, Cf, IRf, 
+      EFf, ED, BW, AT, 
+      Cso, IRs, CF1, EF, 
+      Cs, SAs, AF, ABSd
+      )
+    values (#{soilId,jdbcType=INTEGER}, #{cf,jdbcType=DECIMAL}, #{irf,jdbcType=DECIMAL}, 
+      #{eff,jdbcType=DECIMAL}, #{ed,jdbcType=DECIMAL}, #{bw,jdbcType=DECIMAL}, #{at,jdbcType=DECIMAL}, 
+      #{cso,jdbcType=DECIMAL}, #{irs,jdbcType=DECIMAL}, #{cf1,jdbcType=DECIMAL}, #{ef,jdbcType=DECIMAL}, 
+      #{cs,jdbcType=DECIMAL}, #{sas,jdbcType=DECIMAL}, #{af,jdbcType=DECIMAL}, #{absd,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.endata.springboot.model.Soil">
+    insert into soil
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="soilId != null">
+        soil_Id,
+      </if>
+      <if test="cf != null">
+        Cf,
+      </if>
+      <if test="irf != null">
+        IRf,
+      </if>
+      <if test="eff != null">
+        EFf,
+      </if>
+      <if test="ed != null">
+        ED,
+      </if>
+      <if test="bw != null">
+        BW,
+      </if>
+      <if test="at != null">
+        AT,
+      </if>
+      <if test="cso != null">
+        Cso,
+      </if>
+      <if test="irs != null">
+        IRs,
+      </if>
+      <if test="cf1 != null">
+        CF1,
+      </if>
+      <if test="ef != null">
+        EF,
+      </if>
+      <if test="cs != null">
+        Cs,
+      </if>
+      <if test="sas != null">
+        SAs,
+      </if>
+      <if test="af != null">
+        AF,
+      </if>
+      <if test="absd != null">
+        ABSd,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="soilId != null">
+        #{soilId,jdbcType=INTEGER},
+      </if>
+      <if test="cf != null">
+        #{cf,jdbcType=DECIMAL},
+      </if>
+      <if test="irf != null">
+        #{irf,jdbcType=DECIMAL},
+      </if>
+      <if test="eff != null">
+        #{eff,jdbcType=DECIMAL},
+      </if>
+      <if test="ed != null">
+        #{ed,jdbcType=DECIMAL},
+      </if>
+      <if test="bw != null">
+        #{bw,jdbcType=DECIMAL},
+      </if>
+      <if test="at != null">
+        #{at,jdbcType=DECIMAL},
+      </if>
+      <if test="cso != null">
+        #{cso,jdbcType=DECIMAL},
+      </if>
+      <if test="irs != null">
+        #{irs,jdbcType=DECIMAL},
+      </if>
+      <if test="cf1 != null">
+        #{cf1,jdbcType=DECIMAL},
+      </if>
+      <if test="ef != null">
+        #{ef,jdbcType=DECIMAL},
+      </if>
+      <if test="cs != null">
+        #{cs,jdbcType=DECIMAL},
+      </if>
+      <if test="sas != null">
+        #{sas,jdbcType=DECIMAL},
+      </if>
+      <if test="af != null">
+        #{af,jdbcType=DECIMAL},
+      </if>
+      <if test="absd != null">
+        #{absd,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.endata.springboot.model.Soil">
+    update soil
+    <set>
+      <if test="cf != null">
+        Cf = #{cf,jdbcType=DECIMAL},
+      </if>
+      <if test="irf != null">
+        IRf = #{irf,jdbcType=DECIMAL},
+      </if>
+      <if test="eff != null">
+        EFf = #{eff,jdbcType=DECIMAL},
+      </if>
+      <if test="ed != null">
+        ED = #{ed,jdbcType=DECIMAL},
+      </if>
+      <if test="bw != null">
+        BW = #{bw,jdbcType=DECIMAL},
+      </if>
+      <if test="at != null">
+        AT = #{at,jdbcType=DECIMAL},
+      </if>
+      <if test="cso != null">
+        Cso = #{cso,jdbcType=DECIMAL},
+      </if>
+      <if test="irs != null">
+        IRs = #{irs,jdbcType=DECIMAL},
+      </if>
+      <if test="cf1 != null">
+        CF1 = #{cf1,jdbcType=DECIMAL},
+      </if>
+      <if test="ef != null">
+        EF = #{ef,jdbcType=DECIMAL},
+      </if>
+      <if test="cs != null">
+        Cs = #{cs,jdbcType=DECIMAL},
+      </if>
+      <if test="sas != null">
+        SAs = #{sas,jdbcType=DECIMAL},
+      </if>
+      <if test="af != null">
+        AF = #{af,jdbcType=DECIMAL},
+      </if>
+      <if test="absd != null">
+        ABSd = #{absd,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where soil_Id = #{soilId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.endata.springboot.model.Soil">
+    update soil
+    set Cf = #{cf,jdbcType=DECIMAL},
+      IRf = #{irf,jdbcType=DECIMAL},
+      EFf = #{eff,jdbcType=DECIMAL},
+      ED = #{ed,jdbcType=DECIMAL},
+      BW = #{bw,jdbcType=DECIMAL},
+      AT = #{at,jdbcType=DECIMAL},
+      Cso = #{cso,jdbcType=DECIMAL},
+      IRs = #{irs,jdbcType=DECIMAL},
+      CF1 = #{cf1,jdbcType=DECIMAL},
+      EF = #{ef,jdbcType=DECIMAL},
+      Cs = #{cs,jdbcType=DECIMAL},
+      SAs = #{sas,jdbcType=DECIMAL},
+      AF = #{af,jdbcType=DECIMAL},
+      ABSd = #{absd,jdbcType=DECIMAL}
+    where soil_Id = #{soilId,jdbcType=INTEGER}
+  </update>
+</mapper>
