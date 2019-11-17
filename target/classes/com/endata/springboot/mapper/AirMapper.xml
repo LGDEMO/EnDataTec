@@ -12,19 +12,29 @@
     <result column="AT" jdbcType="DECIMAL" property="at" />
     <result column="ADDinh" jdbcType="DECIMAL" property="addinh" />
   </resultMap>
+
   <sql id="Base_Column_List">
     ADDinh_Id, Ca, IR, ET, EF, ED, BW, AT, ADDinh
   </sql>
+<!--查询空气所有的信息-->
+  <select id="getAirData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from air
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from air
     where ADDinh_Id = #{addinhId,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from air
     where ADDinh_Id = #{addinhId,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.endata.springboot.model.Air">
     insert into air (ADDinh_Id, Ca, IR, 
       ET, EF, ED, BW, 
@@ -33,6 +43,7 @@
       #{et,jdbcType=DECIMAL}, #{ef,jdbcType=DECIMAL}, #{ed,jdbcType=DECIMAL}, #{bw,jdbcType=DECIMAL}, 
       #{at,jdbcType=DECIMAL}, #{addinh,jdbcType=DECIMAL})
   </insert>
+
   <insert id="insertSelective" parameterType="com.endata.springboot.model.Air">
     insert into air
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -94,6 +105,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.endata.springboot.model.Air">
     update air
     <set>
@@ -124,6 +136,7 @@
     </set>
     where ADDinh_Id = #{addinhId,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.endata.springboot.model.Air">
     update air
     set Ca = #{ca,jdbcType=DECIMAL},
@@ -136,4 +149,5 @@
       ADDinh = #{addinh,jdbcType=DECIMAL}
     where ADDinh_Id = #{addinhId,jdbcType=INTEGER}
   </update>
+
 </mapper>

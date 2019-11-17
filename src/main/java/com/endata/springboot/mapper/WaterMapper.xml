@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.endata.springboot.mapper.WaterMapper">
+
   <resultMap id="BaseResultMap" type="com.endata.springboot.model.Water">
     <id column="water_Id" jdbcType="INTEGER" property="waterId" />
     <result column="Cw" jdbcType="DECIMAL" property="cw" />
@@ -16,19 +17,30 @@
     <result column="ADDoral_water" jdbcType="DECIMAL" property="addoralWater" />
     <result column="ADDdermal_water" jdbcType="DECIMAL" property="adddermalWater" />
   </resultMap>
+
   <sql id="Base_Column_List">
     water_Id, Cw, IRw, EF, ED, BW, AT, Saw, PC, CF, ET, ADDoral_water, ADDdermal_water
   </sql>
+
+   <!--获取水所有数据-->
+  <select id="getWaterData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from water
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from water
     where water_Id = #{waterId,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from water
     where water_Id = #{waterId,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.endata.springboot.model.Water">
     insert into water (water_Id, Cw, IRw, 
       EF, ED, BW, AT, 
@@ -39,6 +51,7 @@
       #{saw,jdbcType=DECIMAL}, #{pc,jdbcType=DECIMAL}, #{cf,jdbcType=DECIMAL}, #{et,jdbcType=DECIMAL}, 
       #{addoralWater,jdbcType=DECIMAL}, #{adddermalWater,jdbcType=DECIMAL})
   </insert>
+
   <insert id="insertSelective" parameterType="com.endata.springboot.model.Water">
     insert into water
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -124,6 +137,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.endata.springboot.model.Water">
     update water
     <set>
@@ -166,6 +180,7 @@
     </set>
     where water_Id = #{waterId,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.endata.springboot.model.Water">
     update water
     set Cw = #{cw,jdbcType=DECIMAL},
@@ -182,4 +197,5 @@
       ADDdermal_water = #{adddermalWater,jdbcType=DECIMAL}
     where water_Id = #{waterId,jdbcType=INTEGER}
   </update>
+
 </mapper>

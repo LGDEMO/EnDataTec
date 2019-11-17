@@ -1,7 +1,11 @@
 package com.endata.springboot.mapper;
 
 import com.endata.springboot.model.Air;
+import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
+@Mapper
 public interface AirMapper {
     int deleteByPrimaryKey(Integer addinhId);
 
@@ -14,4 +18,5 @@ public interface AirMapper {
     int updateByPrimaryKeySelective(Air record);
 
     int updateByPrimaryKey(Air record);
+    public List<Air> getAirData();
 }

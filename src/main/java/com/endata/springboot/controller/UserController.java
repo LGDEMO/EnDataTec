@@ -12,11 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +37,7 @@ public class UserController {
         this.userService = userService;
     }
     @PostMapping("user/login")
-    public ResponseBean     login(@RequestBody User user, HttpServletResponse response, HttpServletRequest request) throws UnsupportedEncodingException {
+    public  ResponseBean  login(@RequestBody User user, HttpServletResponse response, HttpServletRequest request) throws UnsupportedEncodingException {
         String userName  = user.getUserName();
         User   userList = userService.login(userName);
         request.setCharacterEncoding("utf-8");//对request传过来的参数设置编码格式，以免传入中文的时候出现问题，必须在request.getParameter之前设置
@@ -54,7 +54,7 @@ public class UserController {
 
 
     @GetMapping("/user/getAllUser")
-    public  Map user(){
+    public  Map getAllUser(){
         Map<String, List<User>> map = new HashMap<String, List<User>>();
         Map<String,String> resultMap =  new HashMap<String,String>();
         List<User> list = userService.getAllUser();
@@ -68,15 +68,23 @@ public class UserController {
         return map;
     }
 
-    @GetMapping("/user/update")
-    public  Object update() {
+    @GetMapping("/user/updateUserPw")
+    public  Map  updateUserPw(@RequestBody User user) {
+        Map<String,Integer> resultMap =  new HashMap<String,Integer>();
+        if(user.getUserName().length()!=0){
+            user.setUserName(user.getUserName());
+        }
+        if(user.getPassword().length()!=0){
+            user.setPassword(user.getPassword());
+        }if(user.getUserid() ==null){
+            User   userList = userService.login(user.getUserName());
+            user.setUserid( userList.getUserid());
+        }
+       int number =  userService.Update(user);
+        resultMap.put("code",200);
+        resultMap.put("更新成功！！！",number);
+        return resultMap;
 
-        return userService.Update();
     }
 
-    @GetMapping("/user/delete")
-    public  Object delete() {
-
-        return userService.Update();
-    }
 }

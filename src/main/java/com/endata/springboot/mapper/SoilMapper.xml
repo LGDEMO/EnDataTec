@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.endata.springboot.mapper.SoilMapper">
+
   <resultMap id="BaseResultMap" type="com.endata.springboot.model.Soil">
     <id column="soil_Id" jdbcType="INTEGER" property="soilId" />
     <result column="Cf" jdbcType="DECIMAL" property="cf" />
@@ -18,15 +19,26 @@
     <result column="AF" jdbcType="DECIMAL" property="af" />
     <result column="ABSd" jdbcType="DECIMAL" property="absd" />
   </resultMap>
+
   <sql id="Base_Column_List">
     soil_Id, Cf, IRf, EFf, ED, BW, AT, Cso, IRs, CF1, EF, Cs, SAs, AF, ABSd
   </sql>
+
+    <!--查询所有土壤的数据-->
+  <select id="getSoilData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from soil
+  </select>
+
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from soil
     where soil_Id = #{soilId,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from soil
     where soil_Id = #{soilId,jdbcType=INTEGER}

@@ -25,11 +25,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int Update() {
-        User user  = new  User();
-        user.setUserid(1);
-        user.setUserName("endata");
-        user.setPassword("123456");
+    public int Update(User user ) {
         int number =   userMapper.updateByPrimaryKeySelective(user);
         System.out.println("更新的结果："+number);
         return  number;

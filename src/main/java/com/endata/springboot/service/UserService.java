@@ -12,6 +12,6 @@ import java.util.List;
 
 public interface UserService {
      public List<User> getAllUser();
-     public  int  Update();
+     public  int  Update(User user);
      User login(String userName);
 }
