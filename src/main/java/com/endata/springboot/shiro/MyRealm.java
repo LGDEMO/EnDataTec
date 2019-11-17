@@ -1,5 +1,9 @@
 package com.endata.springboot.shiro;
 
+import com.endata.springboot.model.User;
+import com.endata.springboot.service.UserService;
+import com.endata.springboot.util.JWTUtil;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.shiro.authc.*;
@@ -7,9 +11,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.inlighting.database.UserService;
-import org.inlighting.database.UserBean;
-import org.inlighting.util.JWTUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +45,7 @@ public class MyRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         String username = JWTUtil.getUsername(principals.toString());
-        UserBean user = userService.getUser(username);
+        User user = userService.login(username);
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         simpleAuthorizationInfo.addRole(user.getRole());
         Set<String> permission = new HashSet<>(Arrays.asList(user.getPermission().split(",")));
@@ -63,12 +65,12 @@ public class MyRealm extends AuthorizingRealm {
             throw new AuthenticationException("token invalid");
         }
 
-        UserBean userBean = userService.getUser(username);
-        if (userBean == null) {
+        User user = userService.login(username);
+        if (user == null) {
             throw new AuthenticationException("User didn't existed!");
         }
 
-        if (! JWTUtil.verify(token, username, userBean.getPassword())) {
+        if (! JWTUtil.verify(token, username, user.getPassword())) {
             throw new AuthenticationException("Username or password error");
         }
 

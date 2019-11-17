@@ -6,7 +6,6 @@ import com.endata.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 /**
  * @author ligang
@@ -18,7 +17,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
-    @Override
+ /*   @Override
     public List<User> getAllUser() {
         return userMapper.getAllUser();
     }
@@ -26,17 +25,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public int Update() {
         User user  = new  User();
-        user.setUserid(3);
+        user.(3);
         user.setUserName("zyc");
         user.setPassword("123456");
         int number =   userMapper.updateByPrimaryKeySelective(user);
         System.out.println("更新的结果："+number);
         return  number;
-    }
+    }*/
 
     @Override
-    public User login(User  user) {
-        User  list =  userMapper.login(user);
+    public User login(String userName) {
+        User  list =  userMapper.login(userName);
         return list;
     }
 }

@@ -55,6 +55,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+   <!--     org.bouncycastle/bcprov-jdk15on/ Maven依赖写法-->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.54</version>
+        </dependency>
 
         <!-- springboot 开发自动热部署 -->
         <dependency>
@@ -78,6 +84,11 @@
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
             <version>3.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>1.5.8.RELEASE</version>
         </dependency>
 
     </dependencies>

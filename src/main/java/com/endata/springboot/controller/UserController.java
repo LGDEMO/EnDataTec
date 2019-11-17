@@ -1,56 +1,57 @@
 package com.endata.springboot.controller;
 
 
+import com.endata.springboot.bean.ResponseBean;
 import com.endata.springboot.model.User;
 import com.endata.springboot.service.UserService;
+import com.endata.springboot.util.JWTUtil;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.annotation.Retention;
-import java.util.HashMap;
-import java.util.Map;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 /**
  * @author ligang
  * @create 2019-11-08 9:41
  * 用户管理功能
  */
-@Controller
-@ResponseBody
+@RestController
 public class UserController {
-    @Autowired
+    private static final Logger LOGGER = LogManager.getLogger(UserController.class);
+
     private UserService userService;
 
+    @Autowired
+    public void setService(UserService userService) {
+        this.userService = userService;
+    }
     @PostMapping("user/login")
-   public Map  login( @RequestBody User user){
-        Map<String,Object> resultMap = new HashMap<String,Object>();
-        String    userName =  user.getUserName();
-        String    password  =user.getPassword();
-        if(userName == null || userName.equals(" ")){
-            resultMap.put("errorMsg","用户名不能为空！！！");//用户名不能为空
-            return resultMap;
-         }else{
-            user.setUserName(userName);
+    public ResponseBean login(@RequestBody User user, HttpServletResponse response, HttpServletRequest request) throws UnsupportedEncodingException {
+        String userName  = user.getUserName();
+        User   userList = userService.login(userName);
+        request.setCharacterEncoding("utf-8");//对request传过来的参数设置编码格式，以免传入中文的时候出现问题，必须在request.getParameter之前设置
+        String name= JWTUtil.sign(user.getUserName(), user.getPassword());
+        Cookie cookie=new Cookie("name",name);
+        response.addCookie(cookie);
+        if (userList.getPassword().equals(user.getPassword())) {
+            return new ResponseBean(200, "Login success", name);
+        } else {
+            throw new UnauthorizedException();
         }
-        if(password == null || password.equals(" ")){//密码不能为空
-            resultMap.put("errorMsg","密码不能为空！！！");
-            return resultMap;
-        }else{
-            user.setPassword(password);
-        }
-        User resultUser = (User) userService.login(user);//查询数据库对应的用户名和密码
-       if(resultUser == null){
-           resultMap.put("resultUser",user);
-           resultMap.put("errorMsg","用户名或则密码错误");
-           return resultMap;
-       }else{
-           resultMap.put("resultUser",resultUser);
-           resultMap.put("success","登录成功");
-           return resultMap;
-       }
-   }
-    @GetMapping("/user/getAllUser")
+    }
+
+
+
+/*    @GetMapping("/user/getAllUser")
     public  Object user(){
         return userService.getAllUser();
     }
@@ -63,5 +64,5 @@ public class UserController {
     @GetMapping("/user/delete")
     public  Object delete() {
         return userService.Update();
-    }
+    }*/
 }
