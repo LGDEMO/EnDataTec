@@ -2,6 +2,8 @@ package com.endata.springboot.service;
 
 import com.endata.springboot.model.User;
 
+import java.util.List;
+
 
 /**
  * @author ligang
@@ -9,7 +11,7 @@ import com.endata.springboot.model.User;
  */
 
 public interface UserService {
-  /*  public List<User>  getAllUser();
-    public  int  Update();*/
+     public List<User> getAllUser();
+     public  int  Update();
      User login(String userName);
 }

@@ -18,11 +18,17 @@
   </sql>
 
 <!--登录-->
-  <select id="login" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="login"  resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from user
     where user_name = #{userName,jdbcType=VARCHAR}
+  </select>
+<!--查询所有的用户-->
+  <select id="getAllUser" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
   </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

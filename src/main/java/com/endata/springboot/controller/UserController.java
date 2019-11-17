@@ -9,7 +9,6 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
@@ -18,6 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author ligang
@@ -51,18 +53,30 @@ public class UserController {
 
 
 
-/*    @GetMapping("/user/getAllUser")
-    public  Object user(){
-        return userService.getAllUser();
+    @GetMapping("/user/getAllUser")
+    public  Map user(){
+        Map<String, List<User>> map = new HashMap<String, List<User>>();
+        Map<String,String> resultMap =  new HashMap<String,String>();
+        List<User> list = userService.getAllUser();
+        if(list.isEmpty()){
+            resultMap.put("code","404");
+            resultMap.put("userData","查询数据为空");
+        }else{
+            map.put("userData",list);
+            return map;
+        }
+        return map;
     }
 
     @GetMapping("/user/update")
     public  Object update() {
+
         return userService.Update();
     }
 
     @GetMapping("/user/delete")
     public  Object delete() {
+
         return userService.Update();
-    }*/
+    }
 }
