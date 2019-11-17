@@ -10,5 +10,7 @@ import java.util.List;
  */
 public interface WaterService {
     public List<Water>  getWaterData();
-    
+    int insert_one(Water water);
+    int insert_two(Water water);
+
 }

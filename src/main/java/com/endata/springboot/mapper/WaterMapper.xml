@@ -41,6 +41,30 @@
     where water_Id = #{waterId,jdbcType=INTEGER}
   </delete>
 
+  <!--公式一的数据插入-->
+  <insert id="insert_one" parameterType="com.endata.springboot.model.Water">
+    insert into water (water_Id, Cw, IRw,
+      EF, ED, BW, AT,
+      Saw, PC, CF, ET,
+      ADDoral_water)
+    values (#{1}, #{cw,jdbcType=DECIMAL}, #{irw,jdbcType=DECIMAL},
+      #{ef,jdbcType=DECIMAL}, #{ed,jdbcType=DECIMAL}, #{bw,jdbcType=DECIMAL}, #{at,jdbcType=DECIMAL},
+      #{addoralWater,jdbcType=DECIMAL})
+  </insert>
+
+  <!--公式一的数据插入-->
+  <insert id="insert_two" parameterType="com.endata.springboot.model.Water">
+    insert into water (water_Id, Cw,
+      EF, ED, BW, AT,
+      Saw, PC, CF, ET,
+      ADDoral_water, ADDdermal_water)
+    values (#{2}, #{cw,jdbcType=DECIMAL},
+      #{ef,jdbcType=DECIMAL}, #{ed,jdbcType=DECIMAL}, #{bw,jdbcType=DECIMAL}, #{at,jdbcType=DECIMAL},
+      #{saw,jdbcType=DECIMAL}, #{pc,jdbcType=DECIMAL}, #{cf,jdbcType=DECIMAL}, #{et,jdbcType=DECIMAL},
+      #{addoralWater,jdbcType=DECIMAL}, #{adddermalWater,jdbcType=DECIMAL})
+  </insert>
+
+
   <insert id="insert" parameterType="com.endata.springboot.model.Water">
     insert into water (water_Id, Cw, IRw, 
       EF, ED, BW, AT, 

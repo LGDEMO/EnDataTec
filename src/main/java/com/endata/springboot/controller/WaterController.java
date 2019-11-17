@@ -7,6 +7,8 @@ import com.endata.springboot.service.WaterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.HashMap;
@@ -41,4 +43,48 @@ public class WaterController {
             return map;
         }
         return map;
-    }}
+    }
+
+
+    @PostMapping("air/calWaterData")
+     public  Map calWaterData(@RequestBody Water water){
+        Map<String,String> resultMap =  new HashMap<String,String>();
+        if(water.getCw()!=null){
+            water.setCw(water.getCw());
+        } if(water.getIrw()!=null){
+            water.setIrw(water.getIrw());
+        } if(water.getEf()!=null){
+            water.setEf(water.getEf());
+        } if(water.getEd()!=null){
+            water.setEd(water.getEd());
+        } if(water.getBw()!=null){
+            water.setBw(water.getBw());
+        } if(water.getAt()!=null){
+            water.setAt(water.getAt());
+        } if(water.getSaw()!=null){
+            water.setSaw(water.getSaw());
+        } if(water.getPc()!=null){
+            water.setPc(water.getPc());
+        } if(water.getCf()!=null){
+            water.setCf(water.getCf());
+        } if(water.getEt()!=null){
+            water.setEt(water.getEt());
+        }
+        long ADDoral_water = water.getCw()*water.getIrw()*water.getEf()*water.getEd() /(water.getBw()*water.getAt());
+        long ADDdermal_water = water.getCw()*water.getSaw()*water.getPc()*water.getCf()*water.getEf()*water.getEt()*water.getEd()/(water.getBw()*water.getAt());
+        water.setAddoralWater(ADDoral_water);
+        water.setAdddermalWater(ADDdermal_water);
+        /*水公式一计算结果的插入*/
+        int number_one = waterService.insert_one(water);
+        resultMap.put("ADDoral_water","公式一计算结果"+ADDoral_water);
+        resultMap.put("number_one","共插入多少条"+number_one);
+
+        /*水公式二计算结果的插入*/
+       int  number_two = waterService.insert_two(water);
+        resultMap.put("ADDdermal_water","公式一计算结果"+ADDdermal_water);
+        resultMap.put("number_two","共插入多少条"+number_two);
+        Map<String, Map<String, String>> map  = new HashMap<>();
+        map.put("waterData",resultMap);
+        return  map ;
+    }
+}

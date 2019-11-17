@@ -33,7 +33,7 @@ public class AirController {
     }
 
 /*获取空气数据*/
-     @GetMapping("water/getAirData")
+     @GetMapping("air/getAirData")
       public Map getAirData(){
          Map<String, List<Air>> map = new HashMap<String, List<Air>>();
          Map<String,String> resultMap =  new HashMap<String,String>();
@@ -49,7 +49,7 @@ public class AirController {
     }
 
      /*计算空气数据，并保存到数据库*/
-    @PostMapping
+    @PostMapping("air/calAirData")
     public Map calAirData(@RequestBody Air air) throws Exception{
         Map<String,String> resultMap =  new HashMap<String,String>();
         if(air.getCa()!=null){

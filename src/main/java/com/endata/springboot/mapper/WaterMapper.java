@@ -19,4 +19,6 @@ public interface WaterMapper {
 
     int updateByPrimaryKey(Water record);
     public List<Water> getWaterData();
+    int insert_one(Water water);//公式一的数据插入
+    int insert_two(Water water);//公式二的数据插入
 }
