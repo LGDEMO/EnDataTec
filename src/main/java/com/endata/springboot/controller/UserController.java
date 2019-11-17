@@ -35,7 +35,7 @@ public class UserController {
         this.userService = userService;
     }
     @PostMapping("user/login")
-    public ResponseBean login(@RequestBody User user, HttpServletResponse response, HttpServletRequest request) throws UnsupportedEncodingException {
+    public ResponseBean     login(@RequestBody User user, HttpServletResponse response, HttpServletRequest request) throws UnsupportedEncodingException {
         String userName  = user.getUserName();
         User   userList = userService.login(userName);
         request.setCharacterEncoding("utf-8");//对request传过来的参数设置编码格式，以免传入中文的时候出现问题，必须在request.getParameter之前设置
