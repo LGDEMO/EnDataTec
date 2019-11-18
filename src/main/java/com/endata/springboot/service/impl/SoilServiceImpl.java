@@ -24,6 +24,11 @@ public class SoilServiceImpl implements SoilService {
     }
 
   @Override
+  public int insert(Soil soil) {
+    return soilMapper.insert(soil);
+  }
+
+  @Override
   public int insert_one(Soil soil) {
     return soilMapper.insert_one(soil);
   }

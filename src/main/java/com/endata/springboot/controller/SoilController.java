@@ -3,6 +3,7 @@ package com.endata.springboot.controller;
 import com.endata.springboot.model.Soil;
 import com.endata.springboot.service.SoilService;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,6 @@ import java.util.Map;
  public  class SoilController {
     private static final Logger LOGGER = LogManager.getLogger(SoilController.class);
 
-
     private SoilService soilService;
     @Autowired
     public void setService(SoilService soilService) {
@@ -29,6 +29,7 @@ import java.util.Map;
     }
 
     /*获取土壤数据*/
+    @CrossOrigin(origins="http://localhost:8080",maxAge = 3600)
     @GetMapping("/soil/getSoilData")
     public Map getSoilData(){
         Map<String, List<Soil>> map = new HashMap<String, List<Soil>>();
@@ -47,10 +48,10 @@ import java.util.Map;
     /**
      * 计算土壤数据
      */
-    @CrossOrigin(origins="http://localhost:8080",maxAge = 3600)
+
     @PostMapping("soil/calSoilData")
     public Map calSoilData(@RequestBody Soil soil){
-        Map<String, String> map = new HashMap<>();
+        Map<String, Float> map = new HashMap<String,Float>();
         if(soil.getCf()!=null){
            soil.setCf(soil.getCf());
         } if(soil.getIrf()!=null){
@@ -79,28 +80,33 @@ import java.util.Map;
             soil.setAf(soil.getAf());
         } if(soil.getAbsd()!=null){
             soil.setAbsd(soil.getAbsd());
+        }if(soil.getSoilId() == null ||soil.getSoilId() == 0) {
+            soil.setSoilId(1);
         }
+
+        Float ADDoral_food = soil.getCf()*soil.getIrf()*soil.getEff()*soil.getEd()/(soil.getBw()*soil.getAt());
         /*土壤公式一计算*/
-       Float ADDoral_food = soil.getCf()*soil.getIrf()*soil.getEff()*soil.getEd()/(soil.getBw()*soil.getAt());
-       if(ADDoral_food !=0){
+        if(ADDoral_food !=0){
            soil.setAddoralFood(ADDoral_food);
-           int number_one = soilService.insert_one(soil);
+           int number_one = soilService.insert(soil);
        }
         /*土壤公式二计算*/
         Float ADDoral_soil = soil.getCso()*soil.getIrs()*soil.getCf1()*soil.getEf()*soil.getEd()/(soil.getBw()*soil.getAt());
        if(ADDoral_soil !=0){
            soil.setAddoralSoil(ADDoral_soil);
-           int number_two = soilService.insert_two(soil);
+           int number_two = soilService.insert(soil);
        }
         /*土壤公式三计算*/
         Float ADDdermal_soil = soil.getCs()*soil.getCf()*soil.getSas()*soil.getAf()*soil.getAbsd()*soil.getEf()*soil.getEd()/(soil.getBw()*soil.getAt());
      if(ADDdermal_soil !=0){
          soil.setAdddermalSoil(ADDdermal_soil);
-         int number_three = soilService.insert_three(soil);
+         int number_three = soilService.insert(soil);
      }
-     map.put("ADDoral_food","土壤第一个公式计算结果如下"+ADDoral_food);
-     map.put("ADDoral_soil","土壤第二个公式计算结果如下："+ADDoral_soil);
-     map.put("ADDdermal_soil","土壤第三个公式计算结果如下："+ADDdermal_soil);
+     Map<String,Map<String,Float>> resultMap = new HashMap<String,Map<String,Float>>();
+     map.put("ADDoral_food",ADDoral_food);
+     map.put("ADDoral_soil",ADDoral_soil);
+     map.put("ADDdermal_soil",ADDdermal_soil);
+     resultMap.put("SoilData",map);
         return  map;
     }
 

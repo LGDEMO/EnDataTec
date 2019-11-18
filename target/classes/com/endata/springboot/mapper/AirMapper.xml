@@ -3,14 +3,14 @@
 <mapper namespace="com.endata.springboot.mapper.AirMapper">
   <resultMap id="BaseResultMap" type="com.endata.springboot.model.Air">
     <id column="ADDinh_Id" jdbcType="INTEGER" property="addinhId" />
-    <result column="Ca" jdbcType="DECIMAL" property="ca" />
-    <result column="IR" jdbcType="DECIMAL" property="ir" />
-    <result column="ET" jdbcType="DECIMAL" property="et" />
-    <result column="EF" jdbcType="DECIMAL" property="ef" />
-    <result column="ED" jdbcType="DECIMAL" property="ed" />
-    <result column="BW" jdbcType="DECIMAL" property="bw" />
-    <result column="AT" jdbcType="DECIMAL" property="at" />
-    <result column="ADDinh" jdbcType="DECIMAL" property="addinh" />
+    <result column="Ca" jdbcType="FLOAT" property="ca" />
+    <result column="IR" jdbcType="FLOAT" property="ir" />
+    <result column="ET" jdbcType="FLOAT" property="et" />
+    <result column="EF" jdbcType="FLOAT" property="ef" />
+    <result column="ED" jdbcType="FLOAT" property="ed" />
+    <result column="BW" jdbcType="FLOAT" property="bw" />
+    <result column="AT" jdbcType="FLOAT" property="at" />
+    <result column="ADDinh" jdbcType="FLOAT" property="addinh" />
   </resultMap>
 
   <sql id="Base_Column_List">
@@ -39,9 +39,9 @@
     insert into air (ADDinh_Id, Ca, IR, 
       ET, EF, ED, BW, 
       AT, ADDinh)
-    values (#{addinhId,jdbcType=INTEGER}, #{ca,jdbcType=DECIMAL}, #{ir,jdbcType=DECIMAL}, 
-      #{et,jdbcType=DECIMAL}, #{ef,jdbcType=DECIMAL}, #{ed,jdbcType=DECIMAL}, #{bw,jdbcType=DECIMAL}, 
-      #{at,jdbcType=DECIMAL}, #{addinh,jdbcType=DECIMAL})
+    values (#{addinhId,jdbcType=INTEGER}, #{ca,jdbcType=FLOAT}, #{ir,jdbcType=FLOAT}, 
+      #{et,jdbcType=FLOAT}, #{ef,jdbcType=FLOAT}, #{ed,jdbcType=FLOAT}, #{bw,jdbcType=FLOAT}, 
+      #{at,jdbcType=FLOAT}, #{addinh,jdbcType=FLOAT})
   </insert>
 
   <insert id="insertSelective" parameterType="com.endata.springboot.model.Air">
@@ -80,28 +80,28 @@
         #{addinhId,jdbcType=INTEGER},
       </if>
       <if test="ca != null">
-        #{ca,jdbcType=DECIMAL},
+        #{ca,jdbcType=FLOAT},
       </if>
       <if test="ir != null">
-        #{ir,jdbcType=DECIMAL},
+        #{ir,jdbcType=FLOAT},
       </if>
       <if test="et != null">
-        #{et,jdbcType=DECIMAL},
+        #{et,jdbcType=FLOAT},
       </if>
       <if test="ef != null">
-        #{ef,jdbcType=DECIMAL},
+        #{ef,jdbcType=FLOAT},
       </if>
       <if test="ed != null">
-        #{ed,jdbcType=DECIMAL},
+        #{ed,jdbcType=FLOAT},
       </if>
       <if test="bw != null">
-        #{bw,jdbcType=DECIMAL},
+        #{bw,jdbcType=FLOAT},
       </if>
       <if test="at != null">
-        #{at,jdbcType=DECIMAL},
+        #{at,jdbcType=FLOAT},
       </if>
       <if test="addinh != null">
-        #{addinh,jdbcType=DECIMAL},
+        #{addinh,jdbcType=FLOAT},
       </if>
     </trim>
   </insert>
@@ -110,28 +110,28 @@
     update air
     <set>
       <if test="ca != null">
-        Ca = #{ca,jdbcType=DECIMAL},
+        Ca = #{ca,jdbcType=FLOAT},
       </if>
       <if test="ir != null">
-        IR = #{ir,jdbcType=DECIMAL},
+        IR = #{ir,jdbcType=FLOAT},
       </if>
       <if test="et != null">
-        ET = #{et,jdbcType=DECIMAL},
+        ET = #{et,jdbcType=FLOAT},
       </if>
       <if test="ef != null">
-        EF = #{ef,jdbcType=DECIMAL},
+        EF = #{ef,jdbcType=FLOAT},
       </if>
       <if test="ed != null">
-        ED = #{ed,jdbcType=DECIMAL},
+        ED = #{ed,jdbcType=FLOAT},
       </if>
       <if test="bw != null">
-        BW = #{bw,jdbcType=DECIMAL},
+        BW = #{bw,jdbcType=FLOAT},
       </if>
       <if test="at != null">
-        AT = #{at,jdbcType=DECIMAL},
+        AT = #{at,jdbcType=FLOAT},
       </if>
       <if test="addinh != null">
-        ADDinh = #{addinh,jdbcType=DECIMAL},
+        ADDinh = #{addinh,jdbcType=FLOAT},
       </if>
     </set>
     where ADDinh_Id = #{addinhId,jdbcType=INTEGER}
@@ -139,14 +139,14 @@
 
   <update id="updateByPrimaryKey" parameterType="com.endata.springboot.model.Air">
     update air
-    set Ca = #{ca,jdbcType=DECIMAL},
-      IR = #{ir,jdbcType=DECIMAL},
-      ET = #{et,jdbcType=DECIMAL},
-      EF = #{ef,jdbcType=DECIMAL},
-      ED = #{ed,jdbcType=DECIMAL},
-      BW = #{bw,jdbcType=DECIMAL},
-      AT = #{at,jdbcType=DECIMAL},
-      ADDinh = #{addinh,jdbcType=DECIMAL}
+    set Ca = #{ca,jdbcType=FLOAT},
+      IR = #{ir,jdbcType=FLOAT},
+      ET = #{et,jdbcType=FLOAT},
+      EF = #{ef,jdbcType=FLOAT},
+      ED = #{ed,jdbcType=FLOAT},
+      BW = #{bw,jdbcType=FLOAT},
+      AT = #{at,jdbcType=FLOAT},
+      ADDinh = #{addinh,jdbcType=FLOAT}
     where ADDinh_Id = #{addinhId,jdbcType=INTEGER}
   </update>
 
