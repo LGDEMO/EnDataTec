@@ -27,6 +27,7 @@ import java.util.Map;
  * 用户管理功能
  */
 @RestController
+@CrossOrigin
 public class UserController {
     private static final Logger LOGGER = LogManager.getLogger(UserController.class);
 
@@ -37,6 +38,9 @@ public class UserController {
         this.userService = userService;
     }
 
+
+
+    @CrossOrigin(origins="http://localhost:8080",maxAge = 3600)
     @PostMapping("user/login")
     public  ResponseBean  login(@RequestBody User user, HttpServletResponse response, HttpServletRequest request) throws UnsupportedEncodingException {
         String userName  = user.getUserName();

@@ -1,10 +1,11 @@
 package com.endata.springboot.controller;
 
 import com.endata.springboot.model.Air;
-import com.endata.springboot.model.User;
+
 import com.endata.springboot.service.AirService;
-import com.endata.springboot.service.UserService;
-import com.sun.org.apache.bcel.internal.generic.RETURN;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +26,7 @@ import java.util.Map;
 @Controller
 @RequestMapping
 public class AirController {
-
+    private static final Logger LOGGER = LogManager.getLogger(AirController.class);
  private AirService airService;
     @Autowired
     public void setService(AirService airService) {

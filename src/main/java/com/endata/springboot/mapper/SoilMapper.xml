@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.endata.springboot.mapper.SoilMapper">
+
   <resultMap id="BaseResultMap" type="com.endata.springboot.model.Soil">
     <id column="soil_Id" jdbcType="INTEGER" property="soilId" />
     <result column="Cf" jdbcType="DECIMAL" property="cf" />
@@ -24,8 +25,15 @@
 
   <sql id="Base_Column_List">
     soil_Id, Cf, IRf, EFf, ED, BW, AT, Cso, IRs, CF1, EF, Cs, SAs, AF, ABSd, ADDoral_food, 
-    ADDoral_soil, ADDdermal-soil
+    ADDoral_soil, ADDdermal_soil
   </sql>
+
+<!--获取土壤数据-->
+  <select id="getSoilData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from soil
+  </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -84,7 +92,7 @@
       EFf, ED, BW, AT, 
       Cso, IRs, CF1, EF, 
       Cs, SAs, AF, ABSd, 
-      ADDoral_food, ADDoral_soil, ADDdermal-soil
+      ADDoral_food, ADDoral_soil, ADDdermal_soil
       )
     values (#{soilId,jdbcType=INTEGER}, #{cf,jdbcType=DECIMAL}, #{irf,jdbcType=DECIMAL}, 
       #{eff,jdbcType=DECIMAL}, #{ed,jdbcType=DECIMAL}, #{bw,jdbcType=DECIMAL}, #{at,jdbcType=DECIMAL}, 
@@ -150,7 +158,7 @@
         ADDoral_soil,
       </if>
       <if test="adddermalSoil != null">
-        ADDdermal-soil,
+        ADDdermal_soil,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -266,7 +274,7 @@
         ADDoral_soil = #{addoralSoil,jdbcType=DECIMAL},
       </if>
       <if test="adddermalSoil != null">
-        ADDdermal-soil = #{adddermalSoil,jdbcType=DECIMAL},
+        ADDdermal_soil = #{adddermalSoil,jdbcType=DECIMAL},
       </if>
     </set>
     where soil_Id = #{soilId,jdbcType=INTEGER}
@@ -291,7 +299,7 @@
       ABSd = #{absd,jdbcType=DECIMAL},
       ADDoral_food = #{addoralFood,jdbcType=DECIMAL},
       ADDoral_soil = #{addoralSoil,jdbcType=DECIMAL},
-      ADDdermal-soil = #{adddermalSoil,jdbcType=DECIMAL}
+      ADDdermal_soil = #{adddermalSoil,jdbcType=DECIMAL}
     where soil_Id = #{soilId,jdbcType=INTEGER}
   </update>
 

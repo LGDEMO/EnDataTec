@@ -35,7 +35,6 @@ public class FigureController {
         AirService airService = null;
         List<Air> airList =  airService.getAirData();/*空气*/
         map.put("airData", Collections.singletonList(airList));
-
         resultMap.put("cityDta",map);
          return  resultMap;
      }

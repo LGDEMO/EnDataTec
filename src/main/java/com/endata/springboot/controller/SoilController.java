@@ -2,12 +2,11 @@ package com.endata.springboot.controller;
 
 import com.endata.springboot.model.Soil;
 import com.endata.springboot.service.SoilService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,8 +16,11 @@ import java.util.Map;
  * @create 2019-11-10 20:29
  * 皮肤接触土壤中污染物的日均暴露量 ,mg/(kg.d)
  */
-@Controller
+@RestController
+@CrossOrigin
  public  class SoilController {
+    private static final Logger LOGGER = LogManager.getLogger(SoilController.class);
+
 
     private SoilService soilService;
     @Autowired
@@ -27,8 +29,8 @@ import java.util.Map;
     }
 
     /*获取土壤数据*/
-    @GetMapping("soil/getSoilData")
-    public Map getSoilData(@RequestBody Soil soil){
+    @GetMapping("/soil/getSoilData")
+    public Map getSoilData(){
         Map<String, List<Soil>> map = new HashMap<String, List<Soil>>();
         Map<String,String> resultMap =  new HashMap<String,String>();
         List<Soil> soilList  = soilService.getSoilData();
@@ -45,7 +47,7 @@ import java.util.Map;
     /**
      * 计算土壤数据
      */
-
+    @CrossOrigin(origins="http://localhost:8080",maxAge = 3600)
     @PostMapping("soil/calSoilData")
     public Map calSoilData(@RequestBody Soil soil){
         Map<String, String> map = new HashMap<>();

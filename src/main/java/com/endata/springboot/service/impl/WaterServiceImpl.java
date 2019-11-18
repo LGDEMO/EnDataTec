@@ -33,4 +33,9 @@ public class WaterServiceImpl implements WaterService {
         return waterMapper.insert_two(water);
     }
 
+    @Override
+    public int insert(Water water) {
+        return waterMapper.insert(water);
+    }
+
 }

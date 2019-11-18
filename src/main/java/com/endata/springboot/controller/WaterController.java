@@ -4,12 +4,11 @@ package com.endata.springboot.controller;
 import com.endata.springboot.model.Water;
 
 import com.endata.springboot.service.WaterService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,10 +19,10 @@ import java.util.Map;
  * @create 2019-11-10 20:25
  * 经口摄入土壤中污染物的日均暴露量,mg/(kg.d)
  */
-@RequestMapping
-@Controller
+@RestController
+@CrossOrigin
 public class WaterController {
-
+    private static final Logger LOGGER = LogManager.getLogger(WaterController.class);
     private WaterService waterService;
     @Autowired
     public void setService(WaterService waterService) {
@@ -45,10 +44,10 @@ public class WaterController {
         return map;
     }
 
-
-    @PostMapping("air/calWaterData")
+    @CrossOrigin(origins="http://localhost:8080",maxAge = 3600)
+    @PostMapping("water/calWaterData")
      public  Map calWaterData(@RequestBody Water water){
-        Map<String,String> resultMap =  new HashMap<String,String>();
+        Map<String, Float> resultMap =  new HashMap<String,Float>();
         if(water.getCw()!=null){
             water.setCw(water.getCw());
         } if(water.getIrw()!=null){
@@ -70,20 +69,23 @@ public class WaterController {
         } if(water.getEt()!=null){
             water.setEt(water.getEt());
         }
-        long ADDoral_water = water.getCw()*water.getIrw()*water.getEf()*water.getEd() /(water.getBw()*water.getAt());
-        long ADDdermal_water = water.getCw()*water.getSaw()*water.getPc()*water.getCf()*water.getEf()*water.getEt()*water.getEd()/(water.getBw()*water.getAt());
+        Float ADDoral_water = water.getCw()*water.getIrw()*water.getEf()*water.getEd() /(water.getBw()*water.getAt());
+        Float ADDdermal_water = water.getCw()*water.getSaw()*water.getPc()*water.getCf()*water.getEf()*water.getEt()*water.getEd()/(water.getBw()*water.getAt());
         water.setAddoralWater(ADDoral_water);
         water.setAdddermalWater(ADDdermal_water);
         /*水公式一计算结果的插入*/
-        int number_one = waterService.insert_one(water);
-        resultMap.put("ADDoral_water","公式一计算结果"+ADDoral_water);
-        resultMap.put("number_one","共插入多少条"+number_one);
+        if(water.getWaterId()==null || water.getWaterId() ==0)
+        {
+            water.setWaterId(1);//公式一
+            int number_one = waterService.insert(water);
+            resultMap.put("ADDoral_water",ADDoral_water);
 
+            water.setWaterId(2);//公式二
+            int number_two = waterService.insert(water);
+            resultMap.put("ADDdermal_water", ADDdermal_water);
+        }
         /*水公式二计算结果的插入*/
-       int  number_two = waterService.insert_two(water);
-        resultMap.put("ADDdermal_water","公式一计算结果"+ADDdermal_water);
-        resultMap.put("number_two","共插入多少条"+number_two);
-        Map<String, Map<String, String>> map  = new HashMap<>();
+        Map<String, Map<String, Float>> map  = new HashMap<>();
         map.put("waterData",resultMap);
         return  map ;
     }

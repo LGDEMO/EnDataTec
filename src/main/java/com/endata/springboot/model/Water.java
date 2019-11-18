@@ -3,29 +3,29 @@ package com.endata.springboot.model;
 public class Water {
     private Integer waterId;
 
-    private Long cw;
+    private Float cw;
 
-    private Long irw;
+    private Float irw;
 
-    private Long ef;
+    private Float ef;
 
-    private Long ed;
+    private Float ed;
 
-    private Long bw;
+    private Float  bw;
 
-    private Long at;
+    private Float at;
 
-    private Long saw;
+    private Float saw;
 
-    private Long pc;
+    private Float pc;
 
-    private Long cf;
+    private Float cf;
 
-    private Long et;
+    private Float et;
 
-    private Long addoralWater;
+    private Float addoralWater;
 
-    private Long adddermalWater;
+    private Float adddermalWater;
 
     public Integer getWaterId() {
         return waterId;
@@ -35,99 +35,99 @@ public class Water {
         this.waterId = waterId;
     }
 
-    public Long getCw() {
+    public Float getCw() {
         return cw;
     }
 
-    public void setCw(Long cw) {
+    public void setCw(Float cw) {
         this.cw = cw;
     }
 
-    public Long getIrw() {
+    public Float getIrw() {
         return irw;
     }
 
-    public void setIrw(Long irw) {
+    public void setIrw(Float irw) {
         this.irw = irw;
     }
 
-    public Long getEf() {
+    public Float getEf() {
         return ef;
     }
 
-    public void setEf(Long ef) {
+    public void setEf(Float ef) {
         this.ef = ef;
     }
 
-    public Long getEd() {
+    public Float getEd() {
         return ed;
     }
 
-    public void setEd(Long ed) {
+    public void setEd(Float ed) {
         this.ed = ed;
     }
 
-    public Long getBw() {
+    public Float getBw() {
         return bw;
     }
 
-    public void setBw(Long bw) {
+    public void setBw(Float bw) {
         this.bw = bw;
     }
 
-    public Long getAt() {
+    public Float getAt() {
         return at;
     }
 
-    public void setAt(Long at) {
+    public void setAt(Float at) {
         this.at = at;
     }
 
-    public Long getSaw() {
+    public Float getSaw() {
         return saw;
     }
 
-    public void setSaw(Long saw) {
+    public void setSaw(Float saw) {
         this.saw = saw;
     }
 
-    public Long getPc() {
+    public Float getPc() {
         return pc;
     }
 
-    public void setPc(Long pc) {
+    public void setPc(Float pc) {
         this.pc = pc;
     }
 
-    public Long getCf() {
+    public Float getCf() {
         return cf;
     }
 
-    public void setCf(Long cf) {
+    public void setCf(Float cf) {
         this.cf = cf;
     }
 
-    public Long getEt() {
+    public Float getEt() {
         return et;
     }
 
-    public void setEt(Long et) {
+    public void setEt(Float et) {
         this.et = et;
     }
 
-    public Long getAddoralWater() {
+    public Float getAddoralWater() {
         return addoralWater;
     }
 
-    public void setAddoralWater(Long addoralWater) {
+    public void setAddoralWater(Float addoralWater) {
         this.addoralWater = addoralWater;
     }
 
-    public Long getAdddermalWater() {
+    public Float getAdddermalWater() {
         return adddermalWater;
     }
 
-    public void setAdddermalWater(Long adddermalWater) {
+    public void setAdddermalWater(Float adddermalWater) {
         this.adddermalWater = adddermalWater;
     }
 }

@@ -66,6 +66,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
     /**
      * 对跨域提供支持
      */
+/*
     @Override
     protected boolean preHandle(ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
@@ -80,6 +81,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         }
         return super.preHandle(request, response);
     }
+*/
 
     /**
      * 将非法请求跳转到 /401
