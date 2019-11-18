@@ -81,19 +81,19 @@ import java.util.Map;
             soil.setAbsd(soil.getAbsd());
         }
         /*土壤公式一计算*/
-       long ADDoral_food = soil.getCf()*soil.getIrf()*soil.getEff()*soil.getEd()/(soil.getBw()*soil.getAt());
+       Float ADDoral_food = soil.getCf()*soil.getIrf()*soil.getEff()*soil.getEd()/(soil.getBw()*soil.getAt());
        if(ADDoral_food !=0){
            soil.setAddoralFood(ADDoral_food);
            int number_one = soilService.insert_one(soil);
        }
         /*土壤公式二计算*/
-       long ADDoral_soil = soil.getCso()*soil.getIrs()*soil.getCf1()*soil.getEf()*soil.getEd()/(soil.getBw()*soil.getAt());
+        Float ADDoral_soil = soil.getCso()*soil.getIrs()*soil.getCf1()*soil.getEf()*soil.getEd()/(soil.getBw()*soil.getAt());
        if(ADDoral_soil !=0){
            soil.setAddoralSoil(ADDoral_soil);
            int number_two = soilService.insert_two(soil);
        }
         /*土壤公式三计算*/
-       long ADDdermal_soil = soil.getCs()*soil.getCf()*soil.getSas()*soil.getAf()*soil.getAbsd()*soil.getEf()*soil.getEd()/(soil.getBw()*soil.getAt());
+        Float ADDdermal_soil = soil.getCs()*soil.getCf()*soil.getSas()*soil.getAf()*soil.getAbsd()*soil.getEf()*soil.getEd()/(soil.getBw()*soil.getAt());
      if(ADDdermal_soil !=0){
          soil.setAdddermalSoil(ADDdermal_soil);
          int number_three = soilService.insert_three(soil);

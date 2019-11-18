@@ -4,18 +4,18 @@
 
   <resultMap id="BaseResultMap" type="com.endata.springboot.model.Water">
     <id column="water_Id" jdbcType="INTEGER" property="waterId" />
-    <result column="Cw" jdbcType="DECIMAL" property="cw" />
-    <result column="IRw" jdbcType="DECIMAL" property="irw" />
-    <result column="EF" jdbcType="DECIMAL" property="ef" />
-    <result column="ED" jdbcType="DECIMAL" property="ed" />
-    <result column="BW" jdbcType="DECIMAL" property="bw" />
-    <result column="AT" jdbcType="DECIMAL" property="at" />
-    <result column="Saw" jdbcType="DECIMAL" property="saw" />
-    <result column="PC" jdbcType="DECIMAL" property="pc" />
-    <result column="CF" jdbcType="DECIMAL" property="cf" />
-    <result column="ET" jdbcType="DECIMAL" property="et" />
-    <result column="ADDoral_water" jdbcType="DECIMAL" property="addoralWater" />
-    <result column="ADDdermal_water" jdbcType="DECIMAL" property="adddermalWater" />
+    <result column="Cw" jdbcType="FLOAT" property="cw" />
+    <result column="IRw" jdbcType="FLOAT" property="irw" />
+    <result column="EF" jdbcType="FLOAT" property="ef" />
+    <result column="ED" jdbcType="FLOAT" property="ed" />
+    <result column="BW" jdbcType="FLOAT" property="bw" />
+    <result column="AT" jdbcType="FLOAT" property="at" />
+    <result column="Saw" jdbcType="FLOAT" property="saw" />
+    <result column="PC" jdbcType="FLOAT" property="pc" />
+    <result column="CF" jdbcType="FLOAT" property="cf" />
+    <result column="ET" jdbcType="FLOAT" property="et" />
+    <result column="ADDoral_water" jdbcType="FLOAT" property="addoralWater" />
+    <result column="ADDdermal_water" jdbcType="FLOAT" property="adddermalWater" />
   </resultMap>
 
   <sql id="Base_Column_List">
@@ -47,9 +47,9 @@
       EF, ED, BW, AT,
       Saw, PC, CF, ET,
       ADDoral_water)
-    values (#{waterId,jdbcType=INTEGER}, #{cw,jdbcType=DECIMAL}, #{irw,jdbcType=DECIMAL},
-      #{ef,jdbcType=DECIMAL}, #{ed,jdbcType=DECIMAL}, #{bw,jdbcType=DECIMAL}, #{at,jdbcType=DECIMAL},
-      #{addoralWater,jdbcType=DECIMAL})
+    values (#{waterId,jdbcType=INTEGER}, #{cw,jdbcType=FLOAT}, #{irw,jdbcType=FLOAT},
+      #{ef,jdbcType=FLOAT}, #{ed,jdbcType=FLOAT}, #{bw,jdbcType=FLOAT}, #{at,jdbcType=FLOAT},
+      #{addoralWater,jdbcType=FLOAT})
   </insert>
 
   <!--公式一的数据插入-->
@@ -58,10 +58,10 @@
       EF, ED, BW, AT,
       Saw, PC, CF, ET,
       ADDoral_water, ADDdermal_water)
-    values (#{waterId,jdbcType=INTEGER}, #{cw,jdbcType=DECIMAL},
-      #{ef,jdbcType=DECIMAL}, #{ed,jdbcType=DECIMAL}, #{bw,jdbcType=DECIMAL}, #{at,jdbcType=DECIMAL},
-      #{saw,jdbcType=DECIMAL}, #{pc,jdbcType=DECIMAL}, #{cf,jdbcType=DECIMAL}, #{et,jdbcType=DECIMAL},
-      #{addoralWater,jdbcType=DECIMAL}, #{adddermalWater,jdbcType=DECIMAL})
+    values (#{waterId,jdbcType=INTEGER}, #{cw,jdbcType=FLOAT},
+      #{ef,jdbcType=FLOAT}, #{ed,jdbcType=FLOAT}, #{bw,jdbcType=FLOAT}, #{at,jdbcType=FLOAT},
+      #{saw,jdbcType=FLOAT}, #{pc,jdbcType=FLOAT}, #{cf,jdbcType=FLOAT}, #{et,jdbcType=FLOAT},
+      #{addoralWater,jdbcType=FLOAT}, #{adddermalWater,jdbcType=FLOAT})
   </insert>
 
 
@@ -71,10 +71,10 @@
       EF, ED, BW, AT, 
       Saw, PC, CF, ET, 
       ADDoral_water, ADDdermal_water)
-    values (#{waterId,jdbcType=INTEGER}, #{cw,jdbcType=DECIMAL}, #{irw,jdbcType=DECIMAL}, 
-      #{ef,jdbcType=DECIMAL}, #{ed,jdbcType=DECIMAL}, #{bw,jdbcType=DECIMAL}, #{at,jdbcType=DECIMAL}, 
-      #{saw,jdbcType=DECIMAL}, #{pc,jdbcType=DECIMAL}, #{cf,jdbcType=DECIMAL}, #{et,jdbcType=DECIMAL}, 
-      #{addoralWater,jdbcType=DECIMAL}, #{adddermalWater,jdbcType=DECIMAL})
+    values (#{waterId,jdbcType=INTEGER}, #{cw,jdbcType=FLOAT}, #{irw,jdbcType=FLOAT}, 
+      #{ef,jdbcType=FLOAT}, #{ed,jdbcType=FLOAT}, #{bw,jdbcType=FLOAT}, #{at,jdbcType=FLOAT}, 
+      #{saw,jdbcType=FLOAT}, #{pc,jdbcType=FLOAT}, #{cf,jdbcType=FLOAT}, #{et,jdbcType=FLOAT}, 
+      #{addoralWater,jdbcType=FLOAT}, #{adddermalWater,jdbcType=FLOAT})
   </insert>
 
   <insert id="insertSelective" parameterType="com.endata.springboot.model.Water">
@@ -125,40 +125,40 @@
         #{waterId,jdbcType=INTEGER},
       </if>
       <if test="cw != null">
-        #{cw,jdbcType=DECIMAL},
+        #{cw,jdbcType=FLOAT},
       </if>
       <if test="irw != null">
-        #{irw,jdbcType=DECIMAL},
+        #{irw,jdbcType=FLOAT},
       </if>
       <if test="ef != null">
-        #{ef,jdbcType=DECIMAL},
+        #{ef,jdbcType=FLOAT},
       </if>
       <if test="ed != null">
-        #{ed,jdbcType=DECIMAL},
+        #{ed,jdbcType=FLOAT},
       </if>
       <if test="bw != null">
-        #{bw,jdbcType=DECIMAL},
+        #{bw,jdbcType=FLOAT},
       </if>
       <if test="at != null">
-        #{at,jdbcType=DECIMAL},
+        #{at,jdbcType=FLOAT},
       </if>
       <if test="saw != null">
-        #{saw,jdbcType=DECIMAL},
+        #{saw,jdbcType=FLOAT},
       </if>
       <if test="pc != null">
-        #{pc,jdbcType=DECIMAL},
+        #{pc,jdbcType=FLOAT},
       </if>
       <if test="cf != null">
-        #{cf,jdbcType=DECIMAL},
+        #{cf,jdbcType=FLOAT},
       </if>
       <if test="et != null">
-        #{et,jdbcType=DECIMAL},
+        #{et,jdbcType=FLOAT},
       </if>
       <if test="addoralWater != null">
-        #{addoralWater,jdbcType=DECIMAL},
+        #{addoralWater,jdbcType=FLOAT},
       </if>
       <if test="adddermalWater != null">
-        #{adddermalWater,jdbcType=DECIMAL},
+        #{adddermalWater,jdbcType=FLOAT},
       </if>
     </trim>
   </insert>
@@ -167,40 +167,40 @@
     update water
     <set>
       <if test="cw != null">
-        Cw = #{cw,jdbcType=DECIMAL},
+        Cw = #{cw,jdbcType=FLOAT},
       </if>
       <if test="irw != null">
-        IRw = #{irw,jdbcType=DECIMAL},
+        IRw = #{irw,jdbcType=FLOAT},
       </if>
       <if test="ef != null">
-        EF = #{ef,jdbcType=DECIMAL},
+        EF = #{ef,jdbcType=FLOAT},
       </if>
       <if test="ed != null">
-        ED = #{ed,jdbcType=DECIMAL},
+        ED = #{ed,jdbcType=FLOAT},
       </if>
       <if test="bw != null">
-        BW = #{bw,jdbcType=DECIMAL},
+        BW = #{bw,jdbcType=FLOAT},
       </if>
       <if test="at != null">
-        AT = #{at,jdbcType=DECIMAL},
+        AT = #{at,jdbcType=FLOAT},
       </if>
       <if test="saw != null">
-        Saw = #{saw,jdbcType=DECIMAL},
+        Saw = #{saw,jdbcType=FLOAT},
       </if>
       <if test="pc != null">
-        PC = #{pc,jdbcType=DECIMAL},
+        PC = #{pc,jdbcType=FLOAT},
       </if>
       <if test="cf != null">
-        CF = #{cf,jdbcType=DECIMAL},
+        CF = #{cf,jdbcType=FLOAT},
       </if>
       <if test="et != null">
-        ET = #{et,jdbcType=DECIMAL},
+        ET = #{et,jdbcType=FLOAT},
       </if>
       <if test="addoralWater != null">
-        ADDoral_water = #{addoralWater,jdbcType=DECIMAL},
+        ADDoral_water = #{addoralWater,jdbcType=FLOAT},
       </if>
       <if test="adddermalWater != null">
-        ADDdermal_water = #{adddermalWater,jdbcType=DECIMAL},
+        ADDdermal_water = #{adddermalWater,jdbcType=FLOAT},
       </if>
     </set>
     where water_Id = #{waterId,jdbcType=INTEGER}
@@ -208,18 +208,18 @@
 
   <update id="updateByPrimaryKey" parameterType="com.endata.springboot.model.Water">
     update water
-    set Cw = #{cw,jdbcType=DECIMAL},
-      IRw = #{irw,jdbcType=DECIMAL},
-      EF = #{ef,jdbcType=DECIMAL},
-      ED = #{ed,jdbcType=DECIMAL},
-      BW = #{bw,jdbcType=DECIMAL},
-      AT = #{at,jdbcType=DECIMAL},
-      Saw = #{saw,jdbcType=DECIMAL},
-      PC = #{pc,jdbcType=DECIMAL},
-      CF = #{cf,jdbcType=DECIMAL},
-      ET = #{et,jdbcType=DECIMAL},
-      ADDoral_water = #{addoralWater,jdbcType=DECIMAL},
-      ADDdermal_water = #{adddermalWater,jdbcType=DECIMAL}
+    set Cw = #{cw,jdbcType=FLOAT},
+      IRw = #{irw,jdbcType=FLOAT},
+      EF = #{ef,jdbcType=FLOAT},
+      ED = #{ed,jdbcType=FLOAT},
+      BW = #{bw,jdbcType=FLOAT},
+      AT = #{at,jdbcType=FLOAT},
+      Saw = #{saw,jdbcType=FLOAT},
+      PC = #{pc,jdbcType=FLOAT},
+      CF = #{cf,jdbcType=FLOAT},
+      ET = #{et,jdbcType=FLOAT},
+      ADDoral_water = #{addoralWater,jdbcType=FLOAT},
+      ADDdermal_water = #{adddermalWater,jdbcType=FLOAT}
     where water_Id = #{waterId,jdbcType=INTEGER}
   </update>
 

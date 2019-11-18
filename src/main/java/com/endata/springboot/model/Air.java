@@ -3,21 +3,21 @@ package com.endata.springboot.model;
 public class Air {
     private Integer addinhId;
 
-    private Long ca;
+    private Float ca;
 
-    private Long ir;
+    private Float ir;
 
-    private Long et;
+    private Float et;
 
-    private Long ef;
+    private Float ef;
 
-    private Long ed;
+    private Float ed;
 
-    private Long bw;
+    private Float bw;
 
-    private Long at;
+    private Float at;
 
-    private Long addinh;
+    private Float addinh;
 
     public Integer getAddinhId() {
         return addinhId;
@@ -27,67 +27,67 @@ public class Air {
         this.addinhId = addinhId;
     }
 
-    public Long getCa() {
+    public Float getCa() {
         return ca;
     }
 
-    public void setCa(Long ca) {
+    public void setCa(Float ca) {
         this.ca = ca;
     }
 
-    public Long getIr() {
+    public Float getIr() {
         return ir;
     }
 
-    public void setIr(Long ir) {
+    public void setIr(Float ir) {
         this.ir = ir;
     }
 
-    public Long getEt() {
+    public Float getEt() {
         return et;
     }
 
-    public void setEt(Long et) {
+    public void setEt(Float et) {
         this.et = et;
     }
 
-    public Long getEf() {
+    public Float getEf() {
         return ef;
     }
 
-    public void setEf(Long ef) {
+    public void setEf(Float ef) {
         this.ef = ef;
     }
 
-    public Long getEd() {
+    public Float getEd() {
         return ed;
     }
 
-    public void setEd(Long ed) {
+    public void setEd(Float ed) {
         this.ed = ed;
     }
 
-    public Long getBw() {
+    public Float getBw() {
         return bw;
     }
 
-    public void setBw(Long bw) {
+    public void setBw(Float bw) {
         this.bw = bw;
     }
 
-    public Long getAt() {
+    public Float getAt() {
         return at;
     }
 
-    public void setAt(Long at) {
+    public void setAt(Float at) {
         this.at = at;
     }
 
-    public Long getAddinh() {
+    public Float getAddinh() {
         return addinh;
     }
 
-    public void setAddinh(Long addinh) {
+    public void setAddinh(Float addinh) {
         this.addinh = addinh;
     }
 }

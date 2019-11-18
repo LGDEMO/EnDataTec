@@ -4,23 +4,23 @@
 
   <resultMap id="BaseResultMap" type="com.endata.springboot.model.Soil">
     <id column="soil_Id" jdbcType="INTEGER" property="soilId" />
-    <result column="Cf" jdbcType="DECIMAL" property="cf" />
-    <result column="IRf" jdbcType="DECIMAL" property="irf" />
-    <result column="EFf" jdbcType="DECIMAL" property="eff" />
-    <result column="ED" jdbcType="DECIMAL" property="ed" />
-    <result column="BW" jdbcType="DECIMAL" property="bw" />
-    <result column="AT" jdbcType="DECIMAL" property="at" />
-    <result column="Cso" jdbcType="DECIMAL" property="cso" />
-    <result column="IRs" jdbcType="DECIMAL" property="irs" />
-    <result column="CF1" jdbcType="DECIMAL" property="cf1" />
-    <result column="EF" jdbcType="DECIMAL" property="ef" />
-    <result column="Cs" jdbcType="DECIMAL" property="cs" />
-    <result column="SAs" jdbcType="DECIMAL" property="sas" />
-    <result column="AF" jdbcType="DECIMAL" property="af" />
-    <result column="ABSd" jdbcType="DECIMAL" property="absd" />
-    <result column="ADDoral_food" jdbcType="DECIMAL" property="addoralFood" />
-    <result column="ADDoral_soil" jdbcType="DECIMAL" property="addoralSoil" />
-    <result column="ADDdermal_soil" jdbcType="DECIMAL" property="adddermalSoil" />
+    <result column="Cf" jdbcType="FLOAT" property="cf" />
+    <result column="IRf" jdbcType="FLOAT" property="irf" />
+    <result column="EFf" jdbcType="FLOAT" property="eff" />
+    <result column="ED" jdbcType="FLOAT" property="ed" />
+    <result column="BW" jdbcType="FLOAT" property="bw" />
+    <result column="AT" jdbcType="FLOAT" property="at" />
+    <result column="Cso" jdbcType="FLOAT" property="cso" />
+    <result column="IRs" jdbcType="FLOAT" property="irs" />
+    <result column="CF1" jdbcType="FLOAT" property="cf1" />
+    <result column="EF" jdbcType="FLOAT" property="ef" />
+    <result column="Cs" jdbcType="FLOAT" property="cs" />
+    <result column="SAs" jdbcType="FLOAT" property="sas" />
+    <result column="AF" jdbcType="FLOAT" property="af" />
+    <result column="ABSd" jdbcType="FLOAT" property="absd" />
+    <result column="ADDoral_food" jdbcType="FLOAT" property="addoralFood" />
+    <result column="ADDoral_soil" jdbcType="FLOAT" property="addoralSoil" />
+    <result column="ADDdermal_soil" jdbcType="FLOAT" property="adddermalSoil" />
   </resultMap>
 
   <sql id="Base_Column_List">
@@ -53,9 +53,9 @@
       EFf, ED, BW, AT,
       ADDoral_food
       )
-    values (#{1}, #{cf,jdbcType=DECIMAL}, #{irf,jdbcType=DECIMAL},
-      #{eff,jdbcType=DECIMAL}, #{ed,jdbcType=DECIMAL}, #{bw,jdbcType=DECIMAL}, #{at,jdbcType=DECIMAL},
-      #{addoralFood,jdbcType=DECIMAL}
+    values (#{1}, #{cf,jdbcType=FLOAT}, #{irf,jdbcType=FLOAT},
+      #{eff,jdbcType=FLOAT}, #{ed,jdbcType=FLOAT}, #{bw,jdbcType=FLOAT}, #{at,jdbcType=FLOAT},
+      #{addoralFood,jdbcType=FLOAT}
       )
   </insert>
   <!--公式二的计算-->
@@ -66,9 +66,9 @@
      ADDoral_soil
       )
     values (#{2},
-      #{ed,jdbcType=DECIMAL}, #{bw,jdbcType=DECIMAL}, #{at,jdbcType=DECIMAL},
-      #{cso,jdbcType=DECIMAL}, #{irs,jdbcType=DECIMAL}, #{cf1,jdbcType=DECIMAL}, #{ef,jdbcType=DECIMAL},
-      #{addoralSoil,jdbcType=DECIMAL}
+      #{ed,jdbcType=FLOAT}, #{bw,jdbcType=FLOAT}, #{at,jdbcType=FLOAT},
+      #{cso,jdbcType=FLOAT}, #{irs,jdbcType=FLOAT}, #{cf1,jdbcType=FLOAT}, #{ef,jdbcType=FLOAT},
+      #{addoralSoil,jdbcType=FLOAT}
       )
   </insert>
   <!--公式三的计算-->
@@ -80,10 +80,10 @@
       ADDdermal_soil
       )
     values (#{3},
-      #{ed,jdbcType=DECIMAL}, #{bw,jdbcType=DECIMAL}, #{at,jdbcType=DECIMAL},
-      #{cf1,jdbcType=DECIMAL}, #{ef,jdbcType=DECIMAL},
-      #{cs,jdbcType=DECIMAL}, #{sas,jdbcType=DECIMAL}, #{af,jdbcType=DECIMAL}, #{absd,jdbcType=DECIMAL},
-      #{adddermalSoil,jdbcType=DECIMAL}
+      #{ed,jdbcType=FLOAT}, #{bw,jdbcType=FLOAT}, #{at,jdbcType=FLOAT},
+      #{cf1,jdbcType=FLOAT}, #{ef,jdbcType=FLOAT},
+      #{cs,jdbcType=FLOAT}, #{sas,jdbcType=FLOAT}, #{af,jdbcType=FLOAT}, #{absd,jdbcType=FLOAT},
+      #{adddermalSoil,jdbcType=FLOAT}
       )
   </insert>
 
@@ -94,11 +94,11 @@
       Cs, SAs, AF, ABSd, 
       ADDoral_food, ADDoral_soil, ADDdermal_soil
       )
-    values (#{soilId,jdbcType=INTEGER}, #{cf,jdbcType=DECIMAL}, #{irf,jdbcType=DECIMAL}, 
-      #{eff,jdbcType=DECIMAL}, #{ed,jdbcType=DECIMAL}, #{bw,jdbcType=DECIMAL}, #{at,jdbcType=DECIMAL}, 
-      #{cso,jdbcType=DECIMAL}, #{irs,jdbcType=DECIMAL}, #{cf1,jdbcType=DECIMAL}, #{ef,jdbcType=DECIMAL}, 
-      #{cs,jdbcType=DECIMAL}, #{sas,jdbcType=DECIMAL}, #{af,jdbcType=DECIMAL}, #{absd,jdbcType=DECIMAL}, 
-      #{addoralFood,jdbcType=DECIMAL}, #{addoralSoil,jdbcType=DECIMAL}, #{adddermalSoil,jdbcType=DECIMAL}
+    values (#{soilId,jdbcType=INTEGER}, #{cf,jdbcType=FLOAT}, #{irf,jdbcType=FLOAT}, 
+      #{eff,jdbcType=FLOAT}, #{ed,jdbcType=FLOAT}, #{bw,jdbcType=FLOAT}, #{at,jdbcType=FLOAT}, 
+      #{cso,jdbcType=FLOAT}, #{irs,jdbcType=FLOAT}, #{cf1,jdbcType=FLOAT}, #{ef,jdbcType=FLOAT}, 
+      #{cs,jdbcType=FLOAT}, #{sas,jdbcType=FLOAT}, #{af,jdbcType=FLOAT}, #{absd,jdbcType=FLOAT}, 
+      #{addoralFood,jdbcType=FLOAT}, #{addoralSoil,jdbcType=FLOAT}, #{adddermalSoil,jdbcType=FLOAT}
       )
   </insert>
 
@@ -166,55 +166,55 @@
         #{soilId,jdbcType=INTEGER},
       </if>
       <if test="cf != null">
-        #{cf,jdbcType=DECIMAL},
+        #{cf,jdbcType=FLOAT},
       </if>
       <if test="irf != null">
-        #{irf,jdbcType=DECIMAL},
+        #{irf,jdbcType=FLOAT},
       </if>
       <if test="eff != null">
-        #{eff,jdbcType=DECIMAL},
+        #{eff,jdbcType=FLOAT},
       </if>
       <if test="ed != null">
-        #{ed,jdbcType=DECIMAL},
+        #{ed,jdbcType=FLOAT},
       </if>
       <if test="bw != null">
-        #{bw,jdbcType=DECIMAL},
+        #{bw,jdbcType=FLOAT},
       </if>
       <if test="at != null">
-        #{at,jdbcType=DECIMAL},
+        #{at,jdbcType=FLOAT},
       </if>
       <if test="cso != null">
-        #{cso,jdbcType=DECIMAL},
+        #{cso,jdbcType=FLOAT},
       </if>
       <if test="irs != null">
-        #{irs,jdbcType=DECIMAL},
+        #{irs,jdbcType=FLOAT},
       </if>
       <if test="cf1 != null">
-        #{cf1,jdbcType=DECIMAL},
+        #{cf1,jdbcType=FLOAT},
       </if>
       <if test="ef != null">
-        #{ef,jdbcType=DECIMAL},
+        #{ef,jdbcType=FLOAT},
       </if>
       <if test="cs != null">
-        #{cs,jdbcType=DECIMAL},
+        #{cs,jdbcType=FLOAT},
       </if>
       <if test="sas != null">
-        #{sas,jdbcType=DECIMAL},
+        #{sas,jdbcType=FLOAT},
       </if>
       <if test="af != null">
-        #{af,jdbcType=DECIMAL},
+        #{af,jdbcType=FLOAT},
       </if>
       <if test="absd != null">
-        #{absd,jdbcType=DECIMAL},
+        #{absd,jdbcType=FLOAT},
       </if>
       <if test="addoralFood != null">
-        #{addoralFood,jdbcType=DECIMAL},
+        #{addoralFood,jdbcType=FLOAT},
       </if>
       <if test="addoralSoil != null">
-        #{addoralSoil,jdbcType=DECIMAL},
+        #{addoralSoil,jdbcType=FLOAT},
       </if>
       <if test="adddermalSoil != null">
-        #{adddermalSoil,jdbcType=DECIMAL},
+        #{adddermalSoil,jdbcType=FLOAT},
       </if>
     </trim>
   </insert>
@@ -226,55 +226,55 @@
     update soil
     <set>
       <if test="cf != null">
-        Cf = #{cf,jdbcType=DECIMAL},
+        Cf = #{cf,jdbcType=FLOAT},
       </if>
       <if test="irf != null">
-        IRf = #{irf,jdbcType=DECIMAL},
+        IRf = #{irf,jdbcType=FLOAT},
       </if>
       <if test="eff != null">
-        EFf = #{eff,jdbcType=DECIMAL},
+        EFf = #{eff,jdbcType=FLOAT},
       </if>
       <if test="ed != null">
-        ED = #{ed,jdbcType=DECIMAL},
+        ED = #{ed,jdbcType=FLOAT},
       </if>
       <if test="bw != null">
-        BW = #{bw,jdbcType=DECIMAL},
+        BW = #{bw,jdbcType=FLOAT},
       </if>
       <if test="at != null">
-        AT = #{at,jdbcType=DECIMAL},
+        AT = #{at,jdbcType=FLOAT},
       </if>
       <if test="cso != null">
-        Cso = #{cso,jdbcType=DECIMAL},
+        Cso = #{cso,jdbcType=FLOAT},
       </if>
       <if test="irs != null">
-        IRs = #{irs,jdbcType=DECIMAL},
+        IRs = #{irs,jdbcType=FLOAT},
       </if>
       <if test="cf1 != null">
-        CF1 = #{cf1,jdbcType=DECIMAL},
+        CF1 = #{cf1,jdbcType=FLOAT},
       </if>
       <if test="ef != null">
-        EF = #{ef,jdbcType=DECIMAL},
+        EF = #{ef,jdbcType=FLOAT},
       </if>
       <if test="cs != null">
-        Cs = #{cs,jdbcType=DECIMAL},
+        Cs = #{cs,jdbcType=FLOAT},
       </if>
       <if test="sas != null">
-        SAs = #{sas,jdbcType=DECIMAL},
+        SAs = #{sas,jdbcType=FLOAT},
       </if>
       <if test="af != null">
-        AF = #{af,jdbcType=DECIMAL},
+        AF = #{af,jdbcType=FLOAT},
       </if>
       <if test="absd != null">
-        ABSd = #{absd,jdbcType=DECIMAL},
+        ABSd = #{absd,jdbcType=FLOAT},
       </if>
       <if test="addoralFood != null">
-        ADDoral_food = #{addoralFood,jdbcType=DECIMAL},
+        ADDoral_food = #{addoralFood,jdbcType=FLOAT},
       </if>
       <if test="addoralSoil != null">
-        ADDoral_soil = #{addoralSoil,jdbcType=DECIMAL},
+        ADDoral_soil = #{addoralSoil,jdbcType=FLOAT},
       </if>
       <if test="adddermalSoil != null">
-        ADDdermal_soil = #{adddermalSoil,jdbcType=DECIMAL},
+        ADDdermal_soil = #{adddermalSoil,jdbcType=FLOAT},
       </if>
     </set>
     where soil_Id = #{soilId,jdbcType=INTEGER}
@@ -283,23 +283,23 @@
 
   <update id="updateByPrimaryKey" parameterType="com.endata.springboot.model.Soil">
     update soil
-    set Cf = #{cf,jdbcType=DECIMAL},
-      IRf = #{irf,jdbcType=DECIMAL},
-      EFf = #{eff,jdbcType=DECIMAL},
-      ED = #{ed,jdbcType=DECIMAL},
-      BW = #{bw,jdbcType=DECIMAL},
-      AT = #{at,jdbcType=DECIMAL},
-      Cso = #{cso,jdbcType=DECIMAL},
-      IRs = #{irs,jdbcType=DECIMAL},
-      CF1 = #{cf1,jdbcType=DECIMAL},
-      EF = #{ef,jdbcType=DECIMAL},
-      Cs = #{cs,jdbcType=DECIMAL},
-      SAs = #{sas,jdbcType=DECIMAL},
-      AF = #{af,jdbcType=DECIMAL},
-      ABSd = #{absd,jdbcType=DECIMAL},
-      ADDoral_food = #{addoralFood,jdbcType=DECIMAL},
-      ADDoral_soil = #{addoralSoil,jdbcType=DECIMAL},
-      ADDdermal_soil = #{adddermalSoil,jdbcType=DECIMAL}
+    set Cf = #{cf,jdbcType=FLOAT},
+      IRf = #{irf,jdbcType=FLOAT},
+      EFf = #{eff,jdbcType=FLOAT},
+      ED = #{ed,jdbcType=FLOAT},
+      BW = #{bw,jdbcType=FLOAT},
+      AT = #{at,jdbcType=FLOAT},
+      Cso = #{cso,jdbcType=FLOAT},
+      IRs = #{irs,jdbcType=FLOAT},
+      CF1 = #{cf1,jdbcType=FLOAT},
+      EF = #{ef,jdbcType=FLOAT},
+      Cs = #{cs,jdbcType=FLOAT},
+      SAs = #{sas,jdbcType=FLOAT},
+      AF = #{af,jdbcType=FLOAT},
+      ABSd = #{absd,jdbcType=FLOAT},
+      ADDoral_food = #{addoralFood,jdbcType=FLOAT},
+      ADDoral_soil = #{addoralSoil,jdbcType=FLOAT},
+      ADDdermal_soil = #{adddermalSoil,jdbcType=FLOAT}
     where soil_Id = #{soilId,jdbcType=INTEGER}
   </update>
 

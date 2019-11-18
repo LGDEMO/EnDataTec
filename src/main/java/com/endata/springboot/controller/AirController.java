@@ -8,10 +8,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -23,8 +20,8 @@ import java.util.Map;
  * @create 2019-11-10 20:28
  * 经口摄入食物的日均暴露量,mg/(kg.d)
  */
-@Controller
-@RequestMapping
+@RestController
+@CrossOrigin
 public class AirController {
     private static final Logger LOGGER = LogManager.getLogger(AirController.class);
  private AirService airService;
@@ -34,6 +31,7 @@ public class AirController {
     }
 
 /*获取空气数据*/
+@CrossOrigin(origins="http://localhost:8080",maxAge = 3600)
      @GetMapping("air/getAirData")
       public Map getAirData(){
          Map<String, List<Air>> map = new HashMap<String, List<Air>>();
@@ -52,7 +50,7 @@ public class AirController {
      /*计算空气数据，并保存到数据库*/
     @PostMapping("air/calAirData")
     public Map calAirData(@RequestBody Air air) throws Exception{
-        Map<String,String> resultMap =  new HashMap<String,String>();
+        Map<String,Float> resultMap =  new HashMap<String,Float>();
         if(air.getCa()!=null){
             air.setCa(air.getCa());
         } if(air.getIr()!=null){
@@ -66,11 +64,16 @@ public class AirController {
         }if(air.getAt()!=null){
             air.setAt(air.getAt());
         }
-        long ADDinh  = air.getCa()*air.getIr()*air.getEt()*air.getEf()*air.getEd()/(air.getBw()*air.getAt());
+        float ADDinh  = air.getCa()*air.getIr()*air.getEt()*air.getEf()*air.getEd()/(air.getBw()*air.getAt());
+        if(air.getAddinhId() == null||air.getAddinhId()==0)
+        {
+            air.setAddinhId(1);
+        }
         air.setAddinh(ADDinh);
         int number = airService.insert(air);
-        resultMap.put("计算并插入数据成功","resultCode："+number);
-        resultMap.put("AirData","计算结果："+ADDinh);
-        return  resultMap;
+        resultMap.put("ADDinh",ADDinh);
+        Map<String,Map<String,Float>> map  = new HashMap<String,Map<String,Float>>();
+        map.put("AirData",resultMap);
+        return  map;
     }
 }

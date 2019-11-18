@@ -3,39 +3,39 @@ package com.endata.springboot.model;
 public class Soil {
     private Integer soilId;
 
-    private Long cf;
+    private Float cf;
 
-    private Long irf;
+    private Float irf;
 
-    private Long eff;
+    private Float eff;
 
-    private Long ed;
+    private Float ed;
 
-    private Long bw;
+    private Float bw;
 
-    private Long at;
+    private Float at;
 
-    private Long cso;
+    private Float cso;
 
-    private Long irs;
+    private Float irs;
 
-    private Long cf1;
+    private Float cf1;
 
-    private Long ef;
+    private Float ef;
 
-    private Long cs;
+    private Float cs;
 
-    private Long sas;
+    private Float sas;
 
-    private Long af;
+    private Float af;
 
-    private Long absd;
+    private Float absd;
 
-    private Long addoralFood;
+    private Float addoralFood;
 
-    private Long addoralSoil;
+    private Float addoralSoil;
 
-    private Long adddermalSoil;
+    private Float adddermalSoil;
 
     public Integer getSoilId() {
         return soilId;
@@ -45,139 +45,139 @@ public class Soil {
         this.soilId = soilId;
     }
 
-    public Long getCf() {
+    public Float getCf() {
         return cf;
     }
 
-    public void setCf(Long cf) {
+    public void setCf(Float cf) {
         this.cf = cf;
     }
 
-    public Long getIrf() {
+    public Float getIrf() {
         return irf;
     }
 
-    public void setIrf(Long irf) {
+    public void setIrf(Float irf) {
         this.irf = irf;
     }
 
-    public Long getEff() {
+    public Float getEff() {
         return eff;
     }
 
-    public void setEff(Long eff) {
+    public void setEff(Float eff) {
         this.eff = eff;
     }
 
-    public Long getEd() {
+    public Float getEd() {
         return ed;
     }
 
-    public void setEd(Long ed) {
+    public void setEd(Float ed) {
         this.ed = ed;
     }
 
-    public Long getBw() {
+    public Float getBw() {
         return bw;
     }
 
-    public void setBw(Long bw) {
+    public void setBw(Float bw) {
         this.bw = bw;
     }
 
-    public Long getAt() {
+    public Float getAt() {
         return at;
     }
 
-    public void setAt(Long at) {
+    public void setAt(Float at) {
         this.at = at;
     }
 
-    public Long getCso() {
+    public Float getCso() {
         return cso;
     }
 
-    public void setCso(Long cso) {
+    public void setCso(Float cso) {
         this.cso = cso;
     }
 
-    public Long getIrs() {
+    public Float getIrs() {
         return irs;
     }
 
-    public void setIrs(Long irs) {
+    public void setIrs(Float irs) {
         this.irs = irs;
     }
 
-    public Long getCf1() {
+    public Float getCf1() {
         return cf1;
     }
 
-    public void setCf1(Long cf1) {
+    public void setCf1(Float cf1) {
         this.cf1 = cf1;
     }
 
-    public Long getEf() {
+    public Float getEf() {
         return ef;
     }
 
-    public void setEf(Long ef) {
+    public void setEf(Float ef) {
         this.ef = ef;
     }
 
-    public Long getCs() {
+    public Float getCs() {
         return cs;
     }
 
-    public void setCs(Long cs) {
+    public void setCs(Float cs) {
         this.cs = cs;
     }
 
-    public Long getSas() {
+    public Float getSas() {
         return sas;
     }
 
-    public void setSas(Long sas) {
+    public void setSas(Float sas) {
         this.sas = sas;
     }
 
-    public Long getAf() {
+    public Float getAf() {
         return af;
     }
 
-    public void setAf(Long af) {
+    public void setAf(Float af) {
         this.af = af;
     }
 
-    public Long getAbsd() {
+    public Float getAbsd() {
         return absd;
     }
 
-    public void setAbsd(Long absd) {
+    public void setAbsd(Float absd) {
         this.absd = absd;
     }
 
-    public Long getAddoralFood() {
+    public Float getAddoralFood() {
         return addoralFood;
     }
 
-    public void setAddoralFood(Long addoralFood) {
+    public void setAddoralFood(Float addoralFood) {
         this.addoralFood = addoralFood;
     }
 
-    public Long getAddoralSoil() {
+    public Float getAddoralSoil() {
         return addoralSoil;
     }
 
-    public void setAddoralSoil(Long addoralSoil) {
+    public void setAddoralSoil(Float addoralSoil) {
         this.addoralSoil = addoralSoil;
     }
 
-    public Long getAdddermalSoil() {
+    public Float getAdddermalSoil() {
         return adddermalSoil;
     }
 
-    public void setAdddermalSoil(Long adddermalSoil) {
+    public void setAdddermalSoil(Float adddermalSoil) {
         this.adddermalSoil = adddermalSoil;
     }
 }
