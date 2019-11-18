@@ -36,6 +36,7 @@ public class UserController {
     public void setService(UserService userService) {
         this.userService = userService;
     }
+
     @PostMapping("user/login")
     public  ResponseBean  login(@RequestBody User user, HttpServletResponse response, HttpServletRequest request) throws UnsupportedEncodingException {
         String userName  = user.getUserName();

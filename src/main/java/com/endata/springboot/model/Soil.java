@@ -31,6 +31,12 @@ public class Soil {
 
     private Long absd;
 
+    private Long addoralFood;
+
+    private Long addoralSoil;
+
+    private Long adddermalSoil;
+
     public Integer getSoilId() {
         return soilId;
     }
@@ -149,5 +155,29 @@ public class Soil {
 
     public void setAbsd(Long absd) {
         this.absd = absd;
+    }
+
+    public Long getAddoralFood() {
+        return addoralFood;
+    }
+
+    public void setAddoralFood(Long addoralFood) {
+        this.addoralFood = addoralFood;
+    }
+
+    public Long getAddoralSoil() {
+        return addoralSoil;
+    }
+
+    public void setAddoralSoil(Long addoralSoil) {
+        this.addoralSoil = addoralSoil;
+    }
+
+    public Long getAdddermalSoil() {
+        return adddermalSoil;
+    }
+
+    public void setAdddermalSoil(Long adddermalSoil) {
+        this.adddermalSoil = adddermalSoil;
     }
 }

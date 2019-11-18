@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.endata.springboot.mapper.SoilMapper">
-
   <resultMap id="BaseResultMap" type="com.endata.springboot.model.Soil">
     <id column="soil_Id" jdbcType="INTEGER" property="soilId" />
     <result column="Cf" jdbcType="DECIMAL" property="cf" />
@@ -18,19 +17,15 @@
     <result column="SAs" jdbcType="DECIMAL" property="sas" />
     <result column="AF" jdbcType="DECIMAL" property="af" />
     <result column="ABSd" jdbcType="DECIMAL" property="absd" />
+    <result column="ADDoral_food" jdbcType="DECIMAL" property="addoralFood" />
+    <result column="ADDoral_soil" jdbcType="DECIMAL" property="addoralSoil" />
+    <result column="ADDdermal_soil" jdbcType="DECIMAL" property="adddermalSoil" />
   </resultMap>
 
   <sql id="Base_Column_List">
-    soil_Id, Cf, IRf, EFf, ED, BW, AT, Cso, IRs, CF1, EF, Cs, SAs, AF, ABSd
+    soil_Id, Cf, IRf, EFf, ED, BW, AT, Cso, IRs, CF1, EF, Cs, SAs, AF, ABSd, ADDoral_food, 
+    ADDoral_soil, ADDdermal-soil
   </sql>
-
-    <!--查询所有土壤的数据-->
-  <select id="getSoilData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from soil
-  </select>
-
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -43,18 +38,63 @@
     delete from soil
     where soil_Id = #{soilId,jdbcType=INTEGER}
   </delete>
+
+<!--公式一的计算-->
+  <insert id="insert_one" parameterType="com.endata.springboot.model.Soil">
+    insert into soil (soil_Id, Cf, IRf,
+      EFf, ED, BW, AT,
+      ADDoral_food
+      )
+    values (#{1}, #{cf,jdbcType=DECIMAL}, #{irf,jdbcType=DECIMAL},
+      #{eff,jdbcType=DECIMAL}, #{ed,jdbcType=DECIMAL}, #{bw,jdbcType=DECIMAL}, #{at,jdbcType=DECIMAL},
+      #{addoralFood,jdbcType=DECIMAL}
+      )
+  </insert>
+  <!--公式二的计算-->
+  <insert id="insert_two" parameterType="com.endata.springboot.model.Soil">
+    insert into soil (soil_Id,
+      ED, BW, AT,
+      Cso, IRs, CF1, EF,
+     ADDoral_soil
+      )
+    values (#{2},
+      #{ed,jdbcType=DECIMAL}, #{bw,jdbcType=DECIMAL}, #{at,jdbcType=DECIMAL},
+      #{cso,jdbcType=DECIMAL}, #{irs,jdbcType=DECIMAL}, #{cf1,jdbcType=DECIMAL}, #{ef,jdbcType=DECIMAL},
+      #{addoralSoil,jdbcType=DECIMAL}
+      )
+  </insert>
+  <!--公式三的计算-->
+  <insert id="insert_three" parameterType="com.endata.springboot.model.Soil">
+    insert into soil (soil_Id,
+      ED, BW, AT,
+      CF1, EF,
+      Cs, SAs, AF, ABSd,
+      ADDdermal_soil
+      )
+    values (#{3},
+      #{ed,jdbcType=DECIMAL}, #{bw,jdbcType=DECIMAL}, #{at,jdbcType=DECIMAL},
+      #{cf1,jdbcType=DECIMAL}, #{ef,jdbcType=DECIMAL},
+      #{cs,jdbcType=DECIMAL}, #{sas,jdbcType=DECIMAL}, #{af,jdbcType=DECIMAL}, #{absd,jdbcType=DECIMAL},
+      #{adddermalSoil,jdbcType=DECIMAL}
+      )
+  </insert>
+
   <insert id="insert" parameterType="com.endata.springboot.model.Soil">
     insert into soil (soil_Id, Cf, IRf, 
       EFf, ED, BW, AT, 
       Cso, IRs, CF1, EF, 
-      Cs, SAs, AF, ABSd
+      Cs, SAs, AF, ABSd, 
+      ADDoral_food, ADDoral_soil, ADDdermal-soil
       )
     values (#{soilId,jdbcType=INTEGER}, #{cf,jdbcType=DECIMAL}, #{irf,jdbcType=DECIMAL}, 
       #{eff,jdbcType=DECIMAL}, #{ed,jdbcType=DECIMAL}, #{bw,jdbcType=DECIMAL}, #{at,jdbcType=DECIMAL}, 
       #{cso,jdbcType=DECIMAL}, #{irs,jdbcType=DECIMAL}, #{cf1,jdbcType=DECIMAL}, #{ef,jdbcType=DECIMAL}, 
-      #{cs,jdbcType=DECIMAL}, #{sas,jdbcType=DECIMAL}, #{af,jdbcType=DECIMAL}, #{absd,jdbcType=DECIMAL}
+      #{cs,jdbcType=DECIMAL}, #{sas,jdbcType=DECIMAL}, #{af,jdbcType=DECIMAL}, #{absd,jdbcType=DECIMAL}, 
+      #{addoralFood,jdbcType=DECIMAL}, #{addoralSoil,jdbcType=DECIMAL}, #{adddermalSoil,jdbcType=DECIMAL}
       )
   </insert>
+
+
   <insert id="insertSelective" parameterType="com.endata.springboot.model.Soil">
     insert into soil
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -103,6 +143,15 @@
       <if test="absd != null">
         ABSd,
       </if>
+      <if test="addoralFood != null">
+        ADDoral_food,
+      </if>
+      <if test="addoralSoil != null">
+        ADDoral_soil,
+      </if>
+      <if test="adddermalSoil != null">
+        ADDdermal-soil,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="soilId != null">
@@ -150,8 +199,21 @@
       <if test="absd != null">
         #{absd,jdbcType=DECIMAL},
       </if>
+      <if test="addoralFood != null">
+        #{addoralFood,jdbcType=DECIMAL},
+      </if>
+      <if test="addoralSoil != null">
+        #{addoralSoil,jdbcType=DECIMAL},
+      </if>
+      <if test="adddermalSoil != null">
+        #{adddermalSoil,jdbcType=DECIMAL},
+      </if>
     </trim>
   </insert>
+
+
+
+
   <update id="updateByPrimaryKeySelective" parameterType="com.endata.springboot.model.Soil">
     update soil
     <set>
@@ -197,9 +259,20 @@
       <if test="absd != null">
         ABSd = #{absd,jdbcType=DECIMAL},
       </if>
+      <if test="addoralFood != null">
+        ADDoral_food = #{addoralFood,jdbcType=DECIMAL},
+      </if>
+      <if test="addoralSoil != null">
+        ADDoral_soil = #{addoralSoil,jdbcType=DECIMAL},
+      </if>
+      <if test="adddermalSoil != null">
+        ADDdermal-soil = #{adddermalSoil,jdbcType=DECIMAL},
+      </if>
     </set>
     where soil_Id = #{soilId,jdbcType=INTEGER}
   </update>
+
+
   <update id="updateByPrimaryKey" parameterType="com.endata.springboot.model.Soil">
     update soil
     set Cf = #{cf,jdbcType=DECIMAL},
@@ -215,7 +288,13 @@
       Cs = #{cs,jdbcType=DECIMAL},
       SAs = #{sas,jdbcType=DECIMAL},
       AF = #{af,jdbcType=DECIMAL},
-      ABSd = #{absd,jdbcType=DECIMAL}
+      ABSd = #{absd,jdbcType=DECIMAL},
+      ADDoral_food = #{addoralFood,jdbcType=DECIMAL},
+      ADDoral_soil = #{addoralSoil,jdbcType=DECIMAL},
+      ADDdermal-soil = #{adddermalSoil,jdbcType=DECIMAL}
     where soil_Id = #{soilId,jdbcType=INTEGER}
   </update>
+
+
+
 </mapper>
