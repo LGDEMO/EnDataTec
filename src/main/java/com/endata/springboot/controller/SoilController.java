@@ -2,12 +2,14 @@ package com.endata.springboot.controller;
 
 import com.endata.springboot.model.Soil;
 import com.endata.springboot.service.SoilService;
-
-import org.apache.commons.collections.map.HashedMap;
+import com.endata.springboot.util.NameByCode;
+import com.endata.springboot.util.NewDate;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +29,8 @@ import java.util.Map;
     public void setService(SoilService soilService) {
         this.soilService = soilService;
     }
-
+    @Autowired
+    private NameByCode nameByCode;
     /*获取土壤数据*/
     @CrossOrigin(origins="http://localhost:8080",maxAge = 3600)
     @GetMapping("/soil/getSoilData")
@@ -48,9 +51,8 @@ import java.util.Map;
     /**
      * 计算土壤数据
      */
-
     @PostMapping("soil/calSoilData")
-    public Map calSoilData(@RequestBody Soil soil){
+    public Map calSoilData(@RequestBody Soil soil) throws ParseException {
         Map<String, Float> map = new HashMap<String,Float>();
         if(soil.getCf()!=null){
            soil.setCf(soil.getCf());
@@ -80,34 +82,36 @@ import java.util.Map;
             soil.setAf(soil.getAf());
         } if(soil.getAbsd()!=null){
             soil.setAbsd(soil.getAbsd());
-        }if(soil.getSoilId() == null ||soil.getSoilId() == 0) {
-            soil.setSoilId(1);
+        }if(soil.getCityCode()!= null){
+            soil.setCityCode(soil.getCityCode());
+            String CityName  =  nameByCode.getCityName(soil.getCityCode());
+            soil.setCityName(CityName);
+        }else{
+            Map<String,String> cityMap  = new HashMap<String,String>();
+            cityMap.put("CityCode","城市代码错误！！！");
+            return cityMap;
         }
+        NewDate newDate  = new NewDate();
+        soil.setDate(newDate.getNewDate());
 
-        Float ADDoral_food = soil.getCf()*soil.getIrf()*soil.getEff()*soil.getEd()/(soil.getBw()*soil.getAt());
         /*土壤公式一计算*/
-        if(ADDoral_food !=0){
-           soil.setAddoralFood(ADDoral_food);
-           int number_one = soilService.insert(soil);
-       }
+        Float ADDoral_food = soil.getCf()*soil.getIrf()*soil.getEff()*soil.getEd()/(soil.getBw()*soil.getAt());
+        soil.setAddoralFood(ADDoral_food);
+
         /*土壤公式二计算*/
         Float ADDoral_soil = soil.getCso()*soil.getIrs()*soil.getCf1()*soil.getEf()*soil.getEd()/(soil.getBw()*soil.getAt());
-       if(ADDoral_soil !=0){
-           soil.setAddoralSoil(ADDoral_soil);
-           int number_two = soilService.insert(soil);
-       }
+        soil.setAddoralSoil(ADDoral_soil);
+
         /*土壤公式三计算*/
         Float ADDdermal_soil = soil.getCs()*soil.getCf()*soil.getSas()*soil.getAf()*soil.getAbsd()*soil.getEf()*soil.getEd()/(soil.getBw()*soil.getAt());
-     if(ADDdermal_soil !=0){
-         soil.setAdddermalSoil(ADDdermal_soil);
-         int number_three = soilService.insert(soil);
-     }
-     Map<String,Map<String,Float>> resultMap = new HashMap<String,Map<String,Float>>();
-     map.put("ADDoral_food",ADDoral_food);
-     map.put("ADDoral_soil",ADDoral_soil);
-     map.put("ADDdermal_soil",ADDdermal_soil);
-     resultMap.put("SoilData",map);
-        return  map;
+        soil.setAdddermalSoil(ADDdermal_soil);
+         int number = soilService.insert(soil);
+         Map<String,Map<String,Float>> resultMap = new HashMap<String,Map<String,Float>>();
+         map.put("ADDoral_food",ADDoral_food);
+         map.put("ADDoral_soil",ADDoral_soil);
+         map.put("ADDdermal_soil",ADDdermal_soil);
+         resultMap.put("SoilData",map);
+            return  map;
     }
 
 }

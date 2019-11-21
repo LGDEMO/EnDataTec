@@ -23,19 +23,15 @@ public class WaterServiceImpl implements WaterService {
         return waterMapper.getWaterData();
     }
 
-    @Override
-    public int insert_one(Water water) {
-        return waterMapper.insert_one(water);
-    }
-
-    @Override
-    public int insert_two(Water water) {
-        return waterMapper.insert_two(water);
-    }
 
     @Override
     public int insert(Water water) {
         return waterMapper.insert(water);
+    }
+
+    @Override
+    public Water getNewWaterData() {
+        return waterMapper.getNewWaterData();
     }
 
 }

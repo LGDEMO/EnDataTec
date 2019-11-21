@@ -1,16 +1,14 @@
 package com.endata.springboot.controller;
 
 import com.endata.springboot.model.Air;
-
 import com.endata.springboot.service.AirService;
-
+import com.endata.springboot.util.NameByCode;
+import com.endata.springboot.util.NewDate;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,11 +22,15 @@ import java.util.Map;
 @CrossOrigin
 public class AirController {
     private static final Logger LOGGER = LogManager.getLogger(AirController.class);
- private AirService airService;
+    private AirService airService;
     @Autowired
     public void setService(AirService airService) {
         this.airService = airService;
     }
+
+    @Autowired
+    private NameByCode nameByCode;
+
 
 /*获取空气数据*/
 @CrossOrigin(origins="http://localhost:8080",maxAge = 3600)
@@ -63,12 +65,18 @@ public class AirController {
             air.setBw(air.getBw());
         }if(air.getAt()!=null){
             air.setAt(air.getAt());
+        }if(air.getCityCode() != null){
+            air.setCityCode(air.getCityCode());
+            String CityName  =  nameByCode.getCityName(air.getCityCode());
+            air.setCityName(CityName);
+        }else{
+            Map<String,String> cityMap  = new HashMap<String,String>();
+            cityMap.put("CityCode","城市代码错误！！！");
+            return cityMap;
         }
+        NewDate newDate  = new NewDate();
+        air.setDate(newDate.getNewDate());
         float ADDinh  = air.getCa()*air.getIr()*air.getEt()*air.getEf()*air.getEd()/(air.getBw()*air.getAt());
-        if(air.getAddinhId() == null||air.getAddinhId()==0)
-        {
-            air.setAddinhId(1);
-        }
         air.setAddinh(ADDinh);
         int number = airService.insert(air);
         resultMap.put("ADDinh",ADDinh);

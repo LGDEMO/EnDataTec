@@ -11,4 +11,5 @@ import java.util.List;
 public interface AirService {
     public List<Air> getAirData();
     int insert(Air air);
+    public Air getNewAirData();
 }

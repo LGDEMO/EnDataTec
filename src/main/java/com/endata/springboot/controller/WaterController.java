@@ -2,14 +2,17 @@ package com.endata.springboot.controller;
 
 
 import com.endata.springboot.model.Water;
-
 import com.endata.springboot.service.WaterService;
+import com.endata.springboot.util.NameByCode;
+import com.endata.springboot.util.NewDate;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.NamedBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Timestamp;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +32,8 @@ public class WaterController {
         this.waterService = waterService;
     }
 
+    @Autowired
+    private NameByCode nameByCode;
     @GetMapping("water/getWaterData")
     public Map getWaterData(){
         Map<String, List<Water>> map = new HashMap<String, List<Water>>();
@@ -46,7 +51,7 @@ public class WaterController {
 
     @CrossOrigin(origins="http://localhost:8080",maxAge = 3600)
     @PostMapping("water/calWaterData")
-     public  Map calWaterData(@RequestBody Water water){
+     public  Map calWaterData(@RequestBody Water water) throws ParseException {
         Map<String, Float> resultMap =  new HashMap<String,Float>();
         if(water.getCw()!=null){
             water.setCw(water.getCw());
@@ -68,23 +73,28 @@ public class WaterController {
             water.setCf(water.getCf());
         } if(water.getEt()!=null){
             water.setEt(water.getEt());
+        }if(water.getCityCode() != null){
+            water.setCityCode(water.getCityCode());
+            String CityName  =  nameByCode.getCityName(water.getCityCode());
+            water.setCityName(CityName);
+        }else{
+            Map<String,String> cityMap  = new HashMap<String,String>();
+            cityMap.put("CityCode","城市代码错误！！！");
+            return cityMap;
         }
+
+        NewDate newDate  = new NewDate();
+        water.setDate(newDate.getNewDate());
         Float ADDoral_water = water.getCw()*water.getIrw()*water.getEf()*water.getEd() /(water.getBw()*water.getAt());
         Float ADDdermal_water = water.getCw()*water.getSaw()*water.getPc()*water.getCf()*water.getEf()*water.getEt()*water.getEd()/(water.getBw()*water.getAt());
         water.setAddoralWater(ADDoral_water);
         water.setAdddermalWater(ADDdermal_water);
-        /*水公式一计算结果的插入*/
-        if(water.getWaterId()==null || water.getWaterId() ==0)
-        {
-            water.setWaterId(1);//公式一
-            int number_one = waterService.insert(water);
+             //公式一
             resultMap.put("ADDoral_water",ADDoral_water);
-
-            water.setWaterId(2);//公式二
-            int number_two = waterService.insert(water);
+             //公式二
             resultMap.put("ADDdermal_water", ADDdermal_water);
-        }
-        /*水公式二计算结果的插入*/
+        /*水公式计算结果的插入*/
+        int number_two = waterService.insert(water);
         Map<String, Map<String, Float>> map  = new HashMap<>();
         map.put("waterData",resultMap);
         return  map ;

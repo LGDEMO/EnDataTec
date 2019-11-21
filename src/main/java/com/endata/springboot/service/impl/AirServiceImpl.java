@@ -27,4 +27,9 @@ public class AirServiceImpl implements AirService {
     public int insert(Air air) {
         return airMapper.insert(air);
     }
+
+    @Override
+    public Air getNewAirData() {
+        return airMapper.getNewAirData();
+    }
 }

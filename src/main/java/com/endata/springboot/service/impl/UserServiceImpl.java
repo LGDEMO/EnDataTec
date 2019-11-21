@@ -36,4 +36,10 @@ public class UserServiceImpl implements UserService {
         User  list =  userMapper.login(userName);
         return list;
     }
+
+    @Override
+    public String getCityName(int city_code) {
+      String  getCityName =  userMapper.getCityName(city_code);
+        return getCityName;
+    }
 }

@@ -12,7 +12,5 @@ public interface SoilService {
 
     public List<Soil> getSoilData();
     int insert(Soil soil);
-    int insert_one(Soil soil);
-    int insert_two(Soil soil);
-    int insert_three(Soil soil);
+    public Soil getNewSoilData();
 }

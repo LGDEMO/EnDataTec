@@ -7,7 +7,6 @@ import com.endata.springboot.service.UserService;
 import com.endata.springboot.util.JWTUtil;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,20 +42,23 @@ public class UserController {
     @CrossOrigin(origins="http://localhost:8080",maxAge = 3600)
     @PostMapping("user/login")
     public  ResponseBean  login(@RequestBody User user, HttpServletResponse response, HttpServletRequest request) throws UnsupportedEncodingException {
-        String userName  = user.getUserName();
-        User   userList = userService.login(userName);
         request.setCharacterEncoding("utf-8");//对request传过来的参数设置编码格式，以免传入中文的时候出现问题，必须在request.getParameter之前设置
-        String name= JWTUtil.sign(user.getUserName(), user.getPassword());
-        Cookie cookie=new Cookie("name",name);
-        response.addCookie(cookie);
-        if (userList.getPassword().equals(user.getPassword())) {
-            return new ResponseBean(200, "Login success", name);
-        } else {
-            throw new UnauthorizedException();
+        String userName  = user.getUserName();
+        User userList = userService.login(userName);
+        if(userList!=null){
+            if (userList.getPassword().equals(user.getPassword())) {
+                String name= JWTUtil.sign(user.getUserName(), user.getPassword());
+                Cookie cookie=new Cookie("name",name);
+                response.addCookie(cookie);
+                int city_code = userList.getCityCode();
+                return new ResponseBean(200, "Login success", city_code);
+            } else {
+                return   new ResponseBean(404, "password entered is ERROR!!!", userName);
+            }
+        }else{
+           return new ResponseBean(404, "The username and password entered is ERROR!!!", userName);
         }
     }
-
-
 
     @GetMapping("/user/getAllUser")
     public  Map getAllUser(){
@@ -64,7 +66,7 @@ public class UserController {
         Map<String,String> resultMap =  new HashMap<String,String>();
         List<User> list = userService.getAllUser();
         if(list.isEmpty()){
-            resultMap.put("code","404");
+            resultMap.put("return_code","404");
             resultMap.put("userData","查询数据为空");
         }else{
             map.put("userData",list);
