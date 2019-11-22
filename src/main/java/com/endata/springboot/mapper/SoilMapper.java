@@ -12,4 +12,6 @@ public interface SoilMapper {
     int insertSelective(Soil record);
     List<Soil> getSoilData();
     public Soil getNewSoilData();
+    public List<Soil> getSoilEnvMapData();
+    public Soil getNewSoilDataByName(String cityName);
 }

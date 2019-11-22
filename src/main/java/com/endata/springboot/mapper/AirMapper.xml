@@ -18,6 +18,20 @@
   <sql id="Base_Column_List">
    city_code, city_name , Ca, IR, ET, EF, ED, BW, AT, date,ADDinh
   </sql>
+<!--  获取最新数据的空气参数-->
+  <select id="getNewAirDataByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from air
+    where  city_name = #{cityName,jdbcType=VARCHAR}
+  </select>
+
+  <!--查询环境点位图的所有数据-->
+  <select id="getAirEnvMapData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from air GROUP BY city_code  ORDER BY date
+  </select>
 
    <!--查询最新的一条数据-->
   <select id="getNewAirData" parameterType="java.lang.Integer" resultMap="BaseResultMap">

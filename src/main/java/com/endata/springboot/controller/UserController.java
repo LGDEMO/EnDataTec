@@ -37,8 +37,6 @@ public class UserController {
         this.userService = userService;
     }
 
-
-
     @CrossOrigin(origins="http://localhost:8080",maxAge = 3600)
     @PostMapping("user/login")
     public  ResponseBean  login(@RequestBody User user, HttpServletResponse response, HttpServletRequest request) throws UnsupportedEncodingException {

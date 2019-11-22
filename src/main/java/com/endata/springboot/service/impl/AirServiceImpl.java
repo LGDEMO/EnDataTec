@@ -32,4 +32,16 @@ public class AirServiceImpl implements AirService {
     public Air getNewAirData() {
         return airMapper.getNewAirData();
     }
+
+    @Override
+    public List<Air>  getAirEnvMapData() {
+        return airMapper.getAirEnvMapData();
+    }
+
+    @Override
+    public Air getNewAirDataByName(String cityName) {
+        return airMapper.getNewAirDataByName(cityName);
+    }
+
+
 }

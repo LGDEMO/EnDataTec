@@ -34,4 +34,14 @@ public class WaterServiceImpl implements WaterService {
         return waterMapper.getNewWaterData();
     }
 
+    @Override
+    public List<Water> getWaterEnvMapData() {
+        return waterMapper.getWaterEnvMapData();
+    }
+
+    @Override
+    public Water getNewWaterDataByName(String cityName) {
+        return waterMapper.getNewWaterDataByName(cityName);
+    }
+
 }

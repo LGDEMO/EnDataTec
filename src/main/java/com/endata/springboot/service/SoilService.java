@@ -13,4 +13,6 @@ public interface SoilService {
     public List<Soil> getSoilData();
     int insert(Soil soil);
     public Soil getNewSoilData();
+    public List<Soil> getSoilEnvMapData();
+    public Soil getNewSoilDataByName(String cityName);
 }

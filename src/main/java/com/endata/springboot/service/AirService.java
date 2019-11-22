@@ -12,4 +12,6 @@ public interface AirService {
     public List<Air> getAirData();
     int insert(Air air);
     public Air getNewAirData();
+    public List<Air>  getAirEnvMapData();
+    public Air  getNewAirDataByName(String cityName);
 }

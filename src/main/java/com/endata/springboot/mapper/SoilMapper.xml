@@ -31,6 +31,21 @@
   </sql>
 
 
+  <!--  获取最新数据的土壤参数-->
+  <select id="getNewSoilDataByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from soil
+    where  city_name = #{cityName,jdbcType=VARCHAR}
+  </select>
+
+  <!--  //获取全部韩环境点位图数据-->
+  <select id="getSoilEnvMapData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from soil   GROUP BY city_code  ORDER BY date
+  </select>
+
   <!--获取最新的一条数据-->
   <select id="getNewSoilData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select

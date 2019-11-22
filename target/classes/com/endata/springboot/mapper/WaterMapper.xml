@@ -24,6 +24,21 @@
     city_code, city_name, Cw, IRw, EF, ED, BW, AT, Saw, PC, CF, ET,date, ADDoral_water, ADDdermal_water
   </sql>
 
+  <!--  获取最新数据的水参数-->
+  <select id="getNewWaterDataByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from water
+    where  city_name = #{cityName,jdbcType=VARCHAR}
+  </select>
+
+<!--  //获取全部韩环境点位图数据-->
+  <select id="getWaterEnvMapData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from water GROUP BY city_code  ORDER BY date
+  </select>
+
   <!--获取水所有数据-->
   <select id="getWaterData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select

@@ -12,4 +12,6 @@ public interface WaterService {
     public List<Water>  getWaterData();
     int insert(Water water);
     public Water getNewWaterData();
+    public List<Water> getWaterEnvMapData();
+    public Water  getNewWaterDataByName(String cityName);
 }

@@ -33,4 +33,14 @@ public class SoilServiceImpl implements SoilService {
     return soilMapper.getNewSoilData();
   }
 
+  @Override
+  public List<Soil> getSoilEnvMapData() {
+    return soilMapper.getSoilEnvMapData();
+  }
+
+  @Override
+  public Soil getNewSoilDataByName(String cityName) {
+    return soilMapper.getNewSoilDataByName(cityName);
+  }
+
 }
