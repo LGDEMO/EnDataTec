@@ -1,13 +1,14 @@
 package com.endata.springboot.controller;
 
 import com.endata.springboot.model.Air;
+import com.endata.springboot.model.MapperResult;
 import com.endata.springboot.model.Soil;
 import com.endata.springboot.model.Water;
 import com.endata.springboot.service.AirService;
 import com.endata.springboot.service.SoilService;
 import com.endata.springboot.service.UserService;
 import com.endata.springboot.service.WaterService;
-import com.sun.org.apache.xpath.internal.operations.Lt;
+
 import org.omg.CORBA.Object;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -37,8 +38,9 @@ public class FigureController {
 
     @Autowired
     private UserService userService;
+    private java.lang.Object JSONObject;
 
-     /*# 获取柱状图信息*/
+    /*# 获取柱状图信息*/
     @GetMapping("/figure/getHistogram")
      public Map getHistogram(){
         Map resultMap  = new HashMap<>();
@@ -65,7 +67,6 @@ public class FigureController {
         Float addinh = airList.getAddinh();
         map.put("addinh",addinh);
 
-        /* resultMap.put("cityName:"城市,)*/
         resultMap.put("return_code",1);
         resultMap.put("cityDta",map);
         return  resultMap;
@@ -75,40 +76,48 @@ public class FigureController {
     /*获取环境点位图信息*/
     @GetMapping("/figure/getEnvMap")
      public Map getEnvMap(){
+
         Map  resultEnvMap = new LinkedHashMap();
-        Map cityMap  = new HashMap();
-        List ListData  = new ArrayList<>();
         /*空气所有数据*/
         List<Air>  airList = airService.getAirEnvMapData();
         List<Water> waterList = waterService.getWaterEnvMapData();
         List<Soil> soilList  = soilService.getSoilEnvMapData();
-        for(int i=0;i<=airList.size();i++){
-            for(Air air:airList){
-             int airCityCode =  air.getCityCode();
-             for(Water water:waterList){
-                 int waterCityCode = water.getCityCode();
-                 for(Soil soil:soilList){
-                     int soilCityCode = soil.getCityCode();
-                     if(airCityCode == waterCityCode  && airCityCode == soilCityCode ){
-                      cityMap.put("AddoralWater",water.getAddoralWater());
-                      cityMap.put("AdddermalWater",water.getAdddermalWater());
-                      cityMap.put("AdddermalSoil",soil.getAdddermalSoil());
-                      cityMap.put("AddoralFood",soil.getAddoralFood());
-                      cityMap.put("AddoralSoil",soil.getAddoralSoil());
-                      cityMap.put("cityCode",air.getCityCode());
-                      cityMap.put("cityName",air.getCityName());
-
-                  }
-                 }
-             }
+        Map<Integer, MapperResult> map = new HashMap<>();
+        airList.forEach(item -> {
+            final Integer cityCode = item.getCityCode();
+            MapperResult result = map.get(cityCode);
+            if (null == result) {
+                result = new MapperResult(cityCode, item.getCityName());
             }
-            ListData.add(cityMap);
-            resultEnvMap.put("mapData",ListData);
-            resultEnvMap.put("return_code",1);
-}
-            return resultEnvMap;
+            result.setAddinh(item.getAddinh());
+            map.put(cityCode, result);
+        });
+        soilList.forEach(item -> {
+            final Integer cityCode = item.getCityCode();
+            MapperResult result = map.get(cityCode);
+            if (null == result) {
+                result = new MapperResult(cityCode, item.getCityName());
+            }
+            result.setAddoralFood(item.getAddoralFood());
+            result.setAddoralSoil(item.getAddoralSoil());
+            result.setAdddermalSoil(item.getAdddermalSoil());
+            map.put(cityCode, result);
+        });
+        waterList.forEach(item -> {
+            final Integer cityCode = item.getCityCode();
+            MapperResult result = map.get(cityCode);
+            if (null == result) {
+                result = new MapperResult(cityCode, item.getCityName());
+            }
+            result.setAddoralWater(item.getAddoralWater());
+            result.setAdddermalWater(item.getAdddermalWater());
+            map.put(cityCode, result);
+        });
+        Collection<MapperResult> collection = map.values();
+        resultEnvMap.put("return_code",1);
+        resultEnvMap.put("data",collection);
+        return resultEnvMap;
     }
-
 
      /*# 医院点位图*/
     @GetMapping("/figure/getHospitalMap")
