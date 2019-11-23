@@ -1,3 +1,4 @@
+/*
 package com.endata.springboot.shiro;
 
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
@@ -24,10 +25,12 @@ public class ShiroConfig {
         // 使用自己的realm
         manager.setRealm(realm);
 
-        /*
+        */
+/*
          * 关闭shiro自带的session，详情见文档
          * http://shiro.apache.org/session-management.html#SessionManagement-StatelessApplications%28Sessionless%29
-         */
+         *//*
+
         DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
         DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = new DefaultSessionStorageEvaluator();
         defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
@@ -49,10 +52,12 @@ public class ShiroConfig {
         factoryBean.setSecurityManager(securityManager);
         factoryBean.setUnauthorizedUrl("/401");
 
-        /*
+        */
+/*
          * 自定义url规则
          * http://shiro.apache.org/web.html#urls-
-         */
+         *//*
+
         Map<String, String> filterRuleMap = new HashMap<>();
         // 所有请求通过我们自己的JWT Filter
         filterRuleMap.put("/**", "jwt");
@@ -62,9 +67,11 @@ public class ShiroConfig {
         return factoryBean;
     }
 
-    /**
+    */
+/**
      * 下面的代码是添加注解支持
-     */
+     *//*
+
     @Bean
     @DependsOn("lifecycleBeanPostProcessor")
     public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
@@ -87,3 +94,4 @@ public class ShiroConfig {
         return advisor;
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.endata.springboot.shiro;
 
 import org.apache.shiro.authc.AuthenticationToken;
@@ -21,3 +22,4 @@ public class JWTToken implements AuthenticationToken {
         return token;
     }
 }
+*/
