@@ -44,12 +44,6 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
-        <!-- 加载spring boot redis包 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-
         <!--actuator监控检查的依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
