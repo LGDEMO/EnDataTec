@@ -103,7 +103,7 @@ import java.util.Map;
         soil.setAddoralSoil(ADDoral_soil);
 
         /*土壤公式三计算*/
-        Float ADDdermal_soil = soil.getCs()*soil.getCf()*soil.getSas()*soil.getAf()*soil.getAbsd()*soil.getEf()*soil.getEd()/(soil.getBw()*soil.getAt());
+        Float ADDdermal_soil = soil.getCs()*soil.getCf1()*soil.getSas()*soil.getAf()*soil.getAbsd()*soil.getEf()*soil.getEd()/(soil.getBw()*soil.getAt());
         soil.setAdddermalSoil(ADDdermal_soil);
          int number = soilService.insert(soil);
          Map<String,Map<String,Float>> resultMap = new HashMap<String,Map<String,Float>>();
