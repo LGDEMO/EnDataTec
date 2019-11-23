@@ -30,6 +30,7 @@ import java.util.Map;
 public class UserController {
     private static final Logger LOGGER = LogManager.getLogger(UserController.class);
 
+    @Autowired
     private UserService userService;
 
     @Autowired

@@ -42,4 +42,9 @@ public class UserServiceImpl implements UserService {
       String  getCityName =  userMapper.getCityName(city_code);
         return getCityName;
     }
+
+    @Override
+    public User getDataByUserName(String userName) {
+        return userMapper.getDataByUserName(userName);
+    }
 }

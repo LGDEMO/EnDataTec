@@ -16,4 +16,5 @@ public interface UserService {
      public  int  Update(User user);
      User login(String userName);
      String getCityName(int city_code);
+      User getDataByUserName(String userName);
 }

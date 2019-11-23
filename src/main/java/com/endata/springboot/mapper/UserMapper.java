@@ -21,4 +21,5 @@ public interface UserMapper {
     User login(String userName);//用户登录
     public List<User> getAllUser();//获取所有用户列表
     String getCityName( int city_code);//根据城市代码查询出城市中文名字
+    User getDataByUserName(String userName);//通过名字获取用户，判断有没有登录
 }
