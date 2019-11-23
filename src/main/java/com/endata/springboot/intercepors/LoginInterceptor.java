@@ -36,10 +36,13 @@ public class LoginInterceptor implements HandlerInterceptor {
         request.setCharacterEncoding("UTF-8");
         Cookie[] cookies = request.getCookies();
         String  userName = null;
-        if (cookies[1]!=null) {
+        if (cookies !=null) {
             for (Cookie cookie : cookies) {
                 String token = cookie.getValue();
-                userName  =  JWTUtil.getUsername(token);
+                String s  =  JWTUtil.getUsername(token);
+                if(s!=null){
+                    userName  = s;
+                }
             }
         }
         User user = userService.getDataByUserName(userName);

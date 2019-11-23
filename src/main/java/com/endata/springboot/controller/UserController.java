@@ -48,6 +48,8 @@ public class UserController {
             if (userList.getPassword().equals(user.getPassword())) {
                 String name= JWTUtil.sign(user.getUserName(), user.getPassword());
                 Cookie cookie=new Cookie("name",name);
+                cookie.setHttpOnly(true);
+                cookie.setPath("/endata");
                 response.addCookie(cookie);
                 int city_code = userList.getCityCode();
                 return new ResponseBean(200, "Login success", city_code);
