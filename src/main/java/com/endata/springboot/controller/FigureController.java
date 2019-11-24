@@ -68,7 +68,7 @@ public class FigureController {
             map.put("addinh", addinh);
 
             resultMap.put("return_code", 1);
-            resultMap.put("cityDta", map);
+            resultMap.put("cityData", map);
            }else{
             Map<String,Integer>  cityMap = new Hashtable<>();
             cityMap.put("return_code",0);
