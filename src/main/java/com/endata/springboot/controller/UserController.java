@@ -84,7 +84,7 @@ public class UserController {
         }
         if(user.getPassword().length()!=0){
             user.setPassword(user.getPassword());
-        }if(user.getUserid() ==null){
+        }if(user.getUserid() == null){
             User   userList = userService.login(user.getUserName());
             user.setUserid( userList.getUserid());
         }

@@ -162,10 +162,11 @@ public class FigureController {
 
  /*    # 获取某个城市的所有参数*/
    @GetMapping("/figure/getCityParam")
-   public Map getCityParam(@RequestParam(name = "cityName") String cityName){
-       Air airList =  airService.getNewAirDataByName(cityName);
-       Soil soilList  = soilService.getNewSoilDataByName(cityName);
-       Water waterList  =  waterService.getNewWaterDataByName(cityName);
+   public Map getCityParam(@RequestParam(name = "city_code") Integer cityCode){
+
+       Air airList =  airService.getNewAirData(cityCode);
+       Soil soilList  = soilService.getNewSoilData(cityCode);
+       Water waterList  =  waterService.getNewWaterData(cityCode);
        /*空气*/
        Map resultMap  = new HashMap<>();
        Map<String,Float> airMap  = new HashMap<String,Float>();
