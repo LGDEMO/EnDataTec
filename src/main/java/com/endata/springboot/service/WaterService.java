@@ -9,9 +9,9 @@ import java.util.List;
  * @create 2019-11-17 20:21
  */
 public interface WaterService {
-    public List<Water>  getWaterData();
+    public List<Water>  getWaterData(Integer cityCode);
     int insert(Water water);
-    public Water getNewWaterData();
+    public Water getNewWaterData(Integer cityCode);
     public List<Water> getWaterEnvMapData();
     public Water  getNewWaterDataByName(String cityName);
 }

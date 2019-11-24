@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -35,16 +36,23 @@ public class AirController {
 /*获取空气数据*/
 @CrossOrigin(origins="http://localhost:8080",maxAge = 3600)
      @GetMapping("air/getAirData")
-      public Map getAirData(){
+      public Map getAirData(@RequestParam("city_code") Integer cityCode){
          Map<String, List<Air>> map = new HashMap<String, List<Air>>();
          Map<String,String> resultMap =  new HashMap<String,String>();
-         List<Air> airList  =  airService.getAirData();
-         if(airList.isEmpty()){
-             resultMap.put("code","404");
-             resultMap.put("AirData","查询数据为空");
+         if(cityCode != null) {
+             List<Air> airList = airService.getAirData(cityCode);
+
+             if (airList.isEmpty()) {
+                 resultMap.put("code", "404");
+                 resultMap.put("AirData", "查询数据为空");
+             } else {
+                 map.put("AirData", airList);
+                 return map;
+             }
          }else{
-             map.put("AirData",airList);
-             return map;
+            Map<String,Integer>  cityMap = new Hashtable<>();
+             cityMap.put("return_code",0);
+             return  cityMap;
          }
          return map;
     }

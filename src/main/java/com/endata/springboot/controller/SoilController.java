@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -34,16 +35,22 @@ import java.util.Map;
     /*获取土壤数据*/
     @CrossOrigin(origins="http://localhost:8080",maxAge = 3600)
     @GetMapping("/soil/getSoilData")
-    public Map getSoilData(){
+    public Map getSoilData(@RequestParam("city_code") Integer cityCode){
         Map<String, List<Soil>> map = new HashMap<String, List<Soil>>();
         Map<String,String> resultMap =  new HashMap<String,String>();
-        List<Soil> soilList  = soilService.getSoilData();
+        if(cityCode != null) {
+        List<Soil> soilList  = soilService.getSoilData(cityCode);
         if(soilList.isEmpty()){
             resultMap.put("code","404");
             resultMap.put("SoilData","查询数据为空");
         }else{
             map.put("SoilData",soilList);
             return map;
+        }
+        }else{
+            Map<String,Integer>  cityMap = new Hashtable<>();
+            cityMap.put("return_code",0);
+            return  cityMap;
         }
         return map;
     }

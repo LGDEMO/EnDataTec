@@ -19,8 +19,8 @@ public class AirServiceImpl implements AirService {
     @Autowired
     private AirMapper airMapper;
     @Override
-    public List<Air> getAirData() {
-        return airMapper.getAirData();
+    public List<Air> getAirData(Integer cityCode) {
+        return airMapper.getAirData(cityCode);
     }
 
     @Override
@@ -29,8 +29,8 @@ public class AirServiceImpl implements AirService {
     }
 
     @Override
-    public Air getNewAirData() {
-        return airMapper.getNewAirData();
+    public Air getNewAirData(Integer cityCode) {
+        return airMapper.getNewAirData(cityCode);
     }
 
     @Override

@@ -10,9 +10,9 @@ import java.util.List;
  */
 public interface SoilService {
 
-    public List<Soil> getSoilData();
+    public List<Soil> getSoilData(Integer cityCode);
     int insert(Soil soil);
-    public Soil getNewSoilData();
+    public Soil getNewSoilData(Integer cityCode);
     public List<Soil> getSoilEnvMapData();
     public Soil getNewSoilDataByName(String cityName);
 }

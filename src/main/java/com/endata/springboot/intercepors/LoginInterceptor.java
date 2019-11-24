@@ -3,6 +3,7 @@ package com.endata.springboot.intercepors;
 import com.endata.springboot.model.User;
 import com.endata.springboot.service.UserService;
 import com.endata.springboot.util.JWTUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.istack.internal.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author ligang
@@ -25,6 +29,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Autowired
     private UserService userService;
+
 
 
     //这个方法是在访问接口之前执行的，我们只需要在这里写验证登陆状态的业务逻辑，就可以在用户调用指定接口之前验证登陆状态了
@@ -51,11 +56,20 @@ public class LoginInterceptor implements HandlerInterceptor {
                 }
             }
             User user = userService.getDataByUserName(userName);
-
             //如果session中没有user，表示没登陆
             if (user == null) {
                 //这个方法返回false表示忽略当前请求，如果一个用户调用了需要登陆才能使用的接口，如果他没有登陆这里会直接忽略掉
                 //当然你可以利用response给用户返回一些提示信息，告诉他没登陆
+                response.setCharacterEncoding("utf-8");
+                response.setContentType("application/json; charset=utf-8");
+                PrintWriter writer = response.getWriter();
+                Map<String, Integer> map = new HashMap<>();
+                map.put("return_code", 0);
+                ObjectMapper json = new ObjectMapper();
+                String params = null;
+                  //把map对象转成json格式的String字符串
+                params = json.writeValueAsString(map);
+                writer.write(params);
                 return false;
             } else {
                 return true;    //如果session里有user，表示该用户已经登陆，放行，用户即可继续调用自己需要的接口

@@ -19,8 +19,8 @@ public class WaterServiceImpl implements WaterService {
     private WaterMapper waterMapper;
 
     @Override
-    public List<Water> getWaterData() {
-        return waterMapper.getWaterData();
+    public List<Water> getWaterData(Integer cityCode) {
+        return waterMapper.getWaterData(cityCode);
     }
 
 
@@ -30,8 +30,8 @@ public class WaterServiceImpl implements WaterService {
     }
 
     @Override
-    public Water getNewWaterData() {
-        return waterMapper.getNewWaterData();
+    public Water getNewWaterData(Integer cityCode) {
+        return waterMapper.getNewWaterData(cityCode);
     }
 
     @Override

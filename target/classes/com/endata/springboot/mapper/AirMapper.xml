@@ -37,13 +37,13 @@
   <select id="getNewAirData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from air  ORDER BY date DESC LIMIT 1
+    from air where city_code = #{cityCode,jdbcType=INTEGER} ORDER BY date DESC LIMIT 1
   </select>
   <!--查询空气所有的信息-->
   <select id="getAirData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from air
+    from air  where city_code = #{cityCode,jdbcType=INTEGER}  ORDER BY date DESC LIMIT 1
   </select>
 
   <insert id="insert" parameterType="com.endata.springboot.model.Air">

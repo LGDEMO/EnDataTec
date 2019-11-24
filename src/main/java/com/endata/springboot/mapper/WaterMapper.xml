@@ -43,13 +43,13 @@
   <select id="getWaterData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from water
+    from water  where city_code = #{cityCode,jdbcType=INTEGER}  ORDER BY date DESC LIMIT 1
   </select>
     <!--获取最新的一条数据-->
   <select id="getNewWaterData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from water  ORDER BY date DESC LIMIT 1
+    from water where city_code = #{cityCode,jdbcType=INTEGER} ORDER BY date DESC LIMIT 1
   </select>
 
   <insert id="insert" parameterType="com.endata.springboot.model.Water">

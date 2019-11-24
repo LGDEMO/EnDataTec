@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Timestamp;
 import java.text.ParseException;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -35,16 +36,22 @@ public class WaterController {
     @Autowired
     private NameByCode nameByCode;
     @GetMapping("water/getWaterData")
-    public Map getWaterData(){
+    public Map getWaterData(@RequestParam("city_code") Integer cityCode){
         Map<String, List<Water>> map = new HashMap<String, List<Water>>();
         Map<String,String> resultMap =  new HashMap<String,String>();
-        List<Water> waterList  =  waterService.getWaterData();
+        if(cityCode != null) {
+        List<Water> waterList  =  waterService.getWaterData(cityCode);
         if(waterList.isEmpty()){
             resultMap.put("code","404");
             resultMap.put("waterData","查询数据为空");
         }else{
             map.put("waterData",waterList);
             return map;
+        }
+        }else{
+            Map<String,Integer>  cityMap = new Hashtable<>();
+            cityMap.put("return_code",0);
+            return  cityMap;
         }
         return map;
     }

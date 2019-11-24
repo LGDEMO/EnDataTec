@@ -10,8 +10,8 @@ public interface WaterMapper {
     int insert(Water record);
 
     int insertSelective(Water record);
-    public List<Water> getWaterData();//获取全部数据
-    public Water getNewWaterData();//获取最新饿一条数据
+    public List<Water> getWaterData(Integer cityCode);//获取全部数据
+    public Water getNewWaterData(Integer cityCode);//获取最新饿一条数据
     public List<Water> getWaterEnvMapData();//获取全部韩环境点位图数据
     public Water  getNewWaterDataByName(String cityName);
 

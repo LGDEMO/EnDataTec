@@ -19,8 +19,8 @@ public class SoilServiceImpl implements SoilService {
   private SoilMapper soilMapper;
 
     @Override
-    public List<Soil> getSoilData() {
-        return soilMapper.getSoilData();
+    public List<Soil> getSoilData(Integer cityCode) {
+        return soilMapper.getSoilData(cityCode);
     }
 
   @Override
@@ -29,8 +29,8 @@ public class SoilServiceImpl implements SoilService {
   }
 
   @Override
-  public Soil getNewSoilData() {
-    return soilMapper.getNewSoilData();
+  public Soil getNewSoilData(Integer cityCode) {
+    return soilMapper.getNewSoilData(cityCode);
   }
 
   @Override

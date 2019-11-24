@@ -10,8 +10,8 @@ public interface SoilMapper {
     int insert(Soil record);
 
     int insertSelective(Soil record);
-    List<Soil> getSoilData();
-    public Soil getNewSoilData();
+    List<Soil> getSoilData(Integer cityCode);
+    public Soil getNewSoilData(Integer cityCode);
     public List<Soil> getSoilEnvMapData();
     public Soil getNewSoilDataByName(String cityName);
 }

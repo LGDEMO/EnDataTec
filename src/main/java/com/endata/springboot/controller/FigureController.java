@@ -42,33 +42,38 @@ public class FigureController {
 
     /*# 获取柱状图信息*/
     @GetMapping("/figure/getHistogram")
-     public Map getHistogram(){
+     public Map getHistogram(@RequestParam("city_code") Integer cityCode){
         Map resultMap  = new HashMap<>();
         Map map  = new HashMap<>();
+        if(cityCode != null) {
+            /*水*/
+            Water waterList = waterService.getNewWaterData(cityCode);
+            Float AddoralWater = waterList.getAddoralWater();
+            Float adddermalWater = waterList.getAdddermalWater();
+            map.put("AddoralWater", AddoralWater);
+            map.put("adddermalWater", adddermalWater);
 
-        /*水*/
-         Water waterList  =  waterService.getNewWaterData();
-         Float AddoralWater = waterList.getAddoralWater();
-         Float adddermalWater  = waterList.getAdddermalWater();
-         map.put("AddoralWater", AddoralWater);
-         map.put("adddermalWater", adddermalWater);
+            /*土壤*/
+            Soil soilList = soilService.getNewSoilData(cityCode);
+            Float addoralFood = soilList.getAddoralFood();
+            Float addoralSoil = soilList.getAddoralSoil();
+            Float adddermalSoil = soilList.getAdddermalSoil();
+            map.put("addoralFood", addoralFood);
+            map.put("addoralSoil", addoralSoil);
+            map.put("adddermalSoil", adddermalSoil);
 
-        /*土壤*/
-         Soil soilList  = soilService.getNewSoilData();
-         Float  addoralFood  = soilList.getAddoralFood();
-         Float  addoralSoil  = soilList.getAddoralSoil();
-         Float adddermalSoil  = soilList.getAdddermalSoil();
-        map.put("addoralFood", addoralFood);
-        map.put("addoralSoil", addoralSoil);
-        map.put("adddermalSoil", adddermalSoil);
+            /*空气*/
+            Air airList = airService.getNewAirData(cityCode);
+            Float addinh = airList.getAddinh();
+            map.put("addinh", addinh);
 
-        /*空气*/
-        Air airList =  airService.getNewAirData();
-        Float addinh = airList.getAddinh();
-        map.put("addinh",addinh);
-
-        resultMap.put("return_code",1);
-        resultMap.put("cityDta",map);
+            resultMap.put("return_code", 1);
+            resultMap.put("cityDta", map);
+           }else{
+            Map<String,Integer>  cityMap = new Hashtable<>();
+            cityMap.put("return_code",0);
+            return  cityMap;
+        }
         return  resultMap;
      }
 

@@ -50,13 +50,13 @@
   <select id="getNewSoilData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from soil  ORDER BY date DESC LIMIT 1
+    from soil where city_code = #{cityCode,jdbcType=INTEGER} ORDER BY date DESC LIMIT 1
   </select>
   <!--获取土壤数据-->
   <select id="getSoilData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from soil
+    from soil  where city_code = #{cityCode,jdbcType=INTEGER}  ORDER BY date DESC LIMIT 1
   </select>
 
   <insert id="insert" parameterType="com.endata.springboot.model.Soil">
