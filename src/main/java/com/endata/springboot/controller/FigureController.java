@@ -192,6 +192,8 @@ public class FigureController {
        soilMap.put("cs",soilList.getCs());
        soilMap.put("af",soilList.getAf());
        soilMap.put("absd",soilList.getAbsd());
+       soilMap.put("sas",soilList.getSas());
+       soilMap.put("ef",soilList.getEf());
        resultMap.put("soilData",soilMap);
        /*水*/
        Map<String,Float> waterMap  = new HashMap<String,Float>();
