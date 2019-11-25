@@ -28,9 +28,14 @@
 
   <!--查询环境点位图的所有数据-->
   <select id="getAirEnvMapData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from air GROUP BY city_code  ORDER BY date
+    SELECT
+    t1.*
+    FROM
+    (select *FROM air ORDER BY date DESC) t1
+    GROUP BY
+    t1.city_code
+    ORDER BY
+    t1.date DESC
   </select>
 
    <!--查询最新的一条数据-->

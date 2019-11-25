@@ -34,9 +34,14 @@
 
 <!--  //获取全部韩环境点位图数据-->
   <select id="getWaterEnvMapData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from water GROUP BY city_code  ORDER BY date
+    SELECT
+    t1.*
+    FROM
+    (select *FROM water ORDER BY date DESC) t1
+    GROUP BY
+    t1.city_code
+    ORDER BY
+    t1.date DESC
   </select>
 
   <!--获取水所有数据-->

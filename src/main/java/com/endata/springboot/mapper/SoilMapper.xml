@@ -39,11 +39,16 @@
     where  city_name = #{cityName,jdbcType=VARCHAR}
   </select>
 
-  <!--  //获取全部韩环境点位图数据-->
+  <!--  //获取全部环境点位图数据-->
   <select id="getSoilEnvMapData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from soil   GROUP BY city_code  ORDER BY date
+    SELECT
+    t1.*
+    FROM
+    (select *FROM soil ORDER BY date DESC) t1
+    GROUP BY
+    t1.city_code
+    ORDER BY
+    t1.date DESC
   </select>
 
   <!--获取最新的一条数据-->
