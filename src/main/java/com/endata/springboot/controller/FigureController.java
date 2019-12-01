@@ -11,10 +11,7 @@ import com.endata.springboot.service.WaterService;
 
 import org.omg.CORBA.Object;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -211,6 +208,80 @@ public class FigureController {
        resultMap.put("retuen_code",1);
        return  resultMap;
    }
+
+        /*# 获取城市对比参数(管理员)*/
+      @PostMapping("/figure/getCityContrastPara")
+      public Map getCityContrastPara(@RequestParam("name") String name){
+          List<Air>  airList = airService.getAirEnvMapData();
+          List<Water> waterList = waterService.getWaterEnvMapData();
+          List<Soil> soilList  = soilService.getSoilEnvMapData();
+          Map  resultCityMap = new LinkedHashMap();
+          Map<String, Float> resultMap = new HashMap<>();
+          if(name != null){
+              //空气
+              if(name.equals("addinh")){
+
+                  airList.forEach(item -> {
+                      final String CityName = item.getCityName();
+                      final  Float   addinh  = item.getAddinh();
+                      resultMap.put(CityName, addinh);
+                  });
+                  resultCityMap.put("return_code",200);
+                  resultCityMap.put("return_data",resultMap);
+                  return resultCityMap;
+              }
+              //水
+              if(name.equals("AddoralWater")){
+                  waterList.forEach(item -> {
+                      final String CityName = item.getCityName();
+                      final  Float   AddoralWater  = item.getAddoralWater();
+                      resultMap.put(CityName, AddoralWater);
+                  });
+                  resultCityMap.put("return_code",200);
+                  resultCityMap.put("return_data",resultMap);
+                  return resultCityMap;
+              }
+              if(name.equals("AdddermalWater")){
+                  waterList.forEach(item -> {
+                      final String CityName = item.getCityName();
+                      final  Float   AdddermalWater  = item.getAdddermalWater();
+                      resultMap.put(CityName, AdddermalWater);
+                  });
+                  resultCityMap.put("return_code",200);
+                  resultCityMap.put("return_data",resultMap);
+                  return resultCityMap;
+              }
+              //土壤
+              if(name.equals("AddoralSoil")){
+                  soilList.forEach(item -> {
+                      final String CityName = item.getCityName();
+                      final  Float   AddoralSoil  = item.getAddoralSoil();
+                      resultMap.put(CityName, AddoralSoil);
+                  });
+                  resultCityMap.put("return_code",200);
+                  resultCityMap.put("return_data",resultMap);
+              }
+              if(name.equals("AddoralFood")){
+                  soilList.forEach(item -> {
+                      final String CityName = item.getCityName();
+                      final  Float   AddoralFood  = item.getAddoralFood();
+                      resultMap.put(CityName, AddoralFood);
+                  });
+                  resultCityMap.put("return_code",200);
+                  resultCityMap.put("return_data",resultMap);
+              }
+              if(name.equals("AdddermalSoil")){
+                  soilList.forEach(item -> {
+                      final String CityName = item.getCityName();
+                      final  Float   AdddermalSoil  = item.getAdddermalSoil();
+                      resultMap.put(CityName, AdddermalSoil);
+                  });
+                  resultCityMap.put("return_code",200);
+                  resultCityMap.put("return_data",resultMap);
+              }
+          }
+          return  resultCityMap;
+      }
 }
 
 
