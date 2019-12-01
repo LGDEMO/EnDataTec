@@ -25,6 +25,11 @@ public class EnvirServiceImpl  implements EnvirService {
     }
 
     @Override
+    public List<Envir> getEnvirMapData() {
+        return envirMapper.getEnvirMapData();
+    }
+
+    @Override
     public int deleteByPrimaryKey(Integer id) {
         return envirMapper.deleteByPrimaryKey(id);
     }

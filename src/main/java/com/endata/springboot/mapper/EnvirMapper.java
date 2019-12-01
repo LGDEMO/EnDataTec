@@ -19,4 +19,5 @@ public interface EnvirMapper {
 
     int updateByPrimaryKey(Envir record);
     public List<Envir> getEnvirData(Integer cityCode);
+    List<Envir> getEnvirMapData();
 }

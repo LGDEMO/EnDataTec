@@ -22,6 +22,7 @@
     from envir
     where id = #{id,jdbcType=INTEGER}
   </select>
+
   <!-- # 环境监测点位获取(管理员)-->
   <select id="getEnvirData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
@@ -31,6 +32,17 @@
   </select>
 
 
+  <!-- # 环境监测点位获取(管理员)-->
+  <select id="getEnvirMapData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  SELECT
+    t1.*
+    FROM
+    (select *FROM envir ORDER BY date DESC) t1
+    GROUP BY
+    t1.city_code,t1.dot_name
+    ORDER BY
+    t1.date DESC
+  </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from envir

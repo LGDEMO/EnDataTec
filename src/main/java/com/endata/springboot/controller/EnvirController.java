@@ -1,16 +1,15 @@
 package com.endata.springboot.controller;
 
 import com.endata.springboot.model.Envir;
+import com.endata.springboot.model.EnvirMap;
+import com.endata.springboot.model.MapperResult;
 import com.endata.springboot.service.EnvirService;
 import com.endata.springboot.util.NewDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author ligang
@@ -112,12 +111,24 @@ public class EnvirController {
     @GetMapping("/envir/getEnvirMapData")
     public Map  getEnvirMapData(){
         Map resultMap  = new HashMap<>();
-
-
-        return resultMap;
-
-  }
-
-
-
+        Map<Integer, EnvirMap> map = new HashMap<>();
+        List<Envir>  envirList = envirService.getEnvirMapData();
+        envirList.forEach(item -> {
+            final Integer cityCode = item.getCityCode();
+            EnvirMap result = map.get(cityCode);
+            if (null == result) {
+                result = new EnvirMap(cityCode, item.getCityName());
+            }
+            result.setCo(item.getCo());
+            result.setNo2(item.getNo2());
+            result.setO3(item.getO3());
+            result.setSo2(item.getSo2());
+            result.setPm25(item.getPm25());
+            map.put(cityCode, result);
+        });
+        Collection<EnvirMap> collection = map.values();
+        resultMap.put("return_code",200);
+        resultMap.put("return_data",collection);
+            return  resultMap;
+        }
 }

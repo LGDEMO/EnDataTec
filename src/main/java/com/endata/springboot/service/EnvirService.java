@@ -11,6 +11,7 @@ import java.util.List;
 
 public interface EnvirService {
     public List<Envir> getEnvirData(Integer cityCode); /*# 环境监测点位获取(管理员)*/
+    List<Envir> getEnvirMapData();//所有的环境监测点位获取(管理员)
 
     int deleteByPrimaryKey(Integer id);//删除数据
 
