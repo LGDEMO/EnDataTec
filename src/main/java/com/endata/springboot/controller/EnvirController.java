@@ -1,9 +1,11 @@
 package com.endata.springboot.controller;
 
+import com.endata.springboot.model.CityParam;
 import com.endata.springboot.model.Envir;
 import com.endata.springboot.model.EnvirMap;
 import com.endata.springboot.model.MapperResult;
 import com.endata.springboot.service.EnvirService;
+import com.endata.springboot.util.NameByCode;
 import com.endata.springboot.util.NewDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +24,11 @@ public class EnvirController {
     @Autowired
     private EnvirService envirService;
 
+    @Autowired
+    private NameByCode nameByCode;
+
      /*# 环境监测点位获取(管理员)*/
-    @PostMapping("/envir/getEnvirData")
+    @GetMapping("/envir/getEnvirData")
     public Map  getEnvirData(@RequestParam("cityCode")  Integer cityCode){
         Map resultMap  = new HashMap<>();
         if(cityCode !=null) {
@@ -43,7 +48,7 @@ public class EnvirController {
     }
 
   /*  # 环境监测点位删除(管理员)*/
-    @PostMapping("/envir/deleteEnvirData")
+    @GetMapping("/envir/deleteEnvirData")
     public Map deleteEnvirData(@RequestParam("cityCode") Integer cityCode,@RequestParam("id") Integer id){
         Map resultMap  = new HashMap<>();
         if(id !=null) {
@@ -65,11 +70,10 @@ public class EnvirController {
         Integer cityCode  = envir.getCityCode();
         if(cityCode!=null){
             envir.setCityCode(cityCode);
+            String CityName  =  nameByCode.getCityName(cityCode);
+            envir.setCityName(CityName);
         }
-        String cityName  = envir.getCityName();
-        if(cityName != null){
-            envir.setCityName(cityName);
-        }
+
         String dotName = envir.getDotName();
         if(dotName !=null){
             envir.setDotName(dotName);
@@ -112,20 +116,32 @@ public class EnvirController {
     public Map  getEnvirMapData(){
         Map resultMap  = new HashMap<>();
         Map<Integer, EnvirMap> map = new HashMap<>();
+        CityParam cityParam  = new CityParam();
+        List<CityParam> cityParamList  =  new ArrayList<CityParam>();
         List<Envir>  envirList = envirService.getEnvirMapData();
         envirList.forEach(item -> {
             final Integer cityCode = item.getCityCode();
             EnvirMap result = map.get(cityCode);
             if (null == result) {
                 result = new EnvirMap(cityCode, item.getCityName());
+                if (cityCode == result.getCityCode()) {
+                    cityParam.setDotName(item.getDotName());
+                    cityParam.setCo(item.getCo());
+                    cityParam.setNo2(item.getNo2());
+                    cityParam.setO3(item.getO3());
+                    cityParam.setSo2(item.getSo2());
+                    cityParam.setPm25(item.getPm25());
+                    cityParamList.add(cityParam);
+                }
             }
-            result.setCo(item.getCo());
-            result.setNo2(item.getNo2());
-            result.setO3(item.getO3());
-            result.setSo2(item.getSo2());
-            result.setPm25(item.getPm25());
+            result.setCityParamlist(cityParamList);
             map.put(cityCode, result);
-        });
+        }
+
+
+
+
+        );
         Collection<EnvirMap> collection = map.values();
         resultMap.put("return_code",200);
         resultMap.put("return_data",collection);

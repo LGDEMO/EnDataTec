@@ -79,7 +79,7 @@ public class UserController {
         return map;
     }
 
-    @GetMapping("/user/updateUserPw")
+    @PostMapping("/user/updateUserPw")
     public  Map  updateUserPw(@RequestBody User user) {
         Map<String,Integer> resultMap =  new HashMap<String,Integer>();
         if(user.getUserName().length()!=0){
@@ -92,12 +92,14 @@ public class UserController {
             user.setUserid( userList.getUserid());
         }
        int number =  userService.Update(user);
-        resultMap.put("code",200);
+        resultMap.put("return_code",200);
         resultMap.put("更新成功！！！",number);
         return resultMap;
 
     }
 
+
+    /*支持采纳数的上传*/
     @RequestMapping(value = "/user/uploadFileAction", method = RequestMethod.POST)
     public ModelAndView uploadFileAction(@RequestParam("uploadFile") MultipartFile uploadFile, @RequestParam("id") Long id) {
         ModelAndView modelAndView = new ModelAndView();
@@ -132,7 +134,7 @@ public class UserController {
         return modelAndView;
     }
 
-
+    /*支持采纳数的下载*/
     @RequestMapping("downloadFileAction")
     public void downloadFileAction(HttpServletRequest request, HttpServletResponse response) {
         response.setCharacterEncoding(request.getCharacterEncoding());

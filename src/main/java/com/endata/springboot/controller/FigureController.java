@@ -78,7 +78,6 @@ public class FigureController {
     /*获取环境点位图信息*/
     @GetMapping("/figure/getEnvMap")
      public Map getEnvMap(){
-
         Map  resultEnvMap = new LinkedHashMap();
         /*空气所有数据*/
         List<Air>  airList = airService.getAirEnvMapData();
@@ -210,7 +209,7 @@ public class FigureController {
    }
 
         /*# 获取城市对比参数(管理员)*/
-      @PostMapping("/figure/getCityContrastPara")
+      @GetMapping("/figure/getCityContrastPara")
       public Map getCityContrastPara(@RequestParam("name") String name){
           List<Air>  airList = airService.getAirEnvMapData();
           List<Water> waterList = waterService.getWaterEnvMapData();
@@ -220,7 +219,6 @@ public class FigureController {
           if(name != null){
               //空气
               if(name.equals("addinh")){
-
                   airList.forEach(item -> {
                       final String CityName = item.getCityName();
                       final  Float   addinh  = item.getAddinh();
