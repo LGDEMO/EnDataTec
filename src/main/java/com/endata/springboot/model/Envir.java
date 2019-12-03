@@ -1,6 +1,7 @@
 package com.endata.springboot.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Envir {
     private Integer id;
@@ -22,6 +23,18 @@ public class Envir {
     private Float o3;
 
     private Date date;
+
+    private List<CityParam> cityList;
+
+    public Envir() {
+        super();
+    }
+
+    public Envir(Integer cityCode, String cityName, List<CityParam> cityList) {
+        this.cityCode = cityCode;
+        this.cityName = cityName;
+        this.cityList = cityList;
+    }
 
     public Integer getId() {
         return id;
@@ -101,5 +114,13 @@ public class Envir {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public List<CityParam> getCityList() {
+        return cityList;
+    }
+
+    public void setCityList(List<CityParam> cityList) {
+        this.cityList = cityList;
     }
 }
