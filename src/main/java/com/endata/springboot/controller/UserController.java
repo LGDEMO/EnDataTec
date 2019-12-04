@@ -8,9 +8,11 @@ import com.endata.springboot.util.JWTUtil;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
@@ -95,70 +97,6 @@ public class UserController {
         resultMap.put("return_code",200);
         resultMap.put("更新成功！！！",number);
         return resultMap;
-
-    }
-
-
-    /*支持采纳数的上传*/
-    @RequestMapping(value = "/user/uploadFileAction", method = RequestMethod.POST)
-    public ModelAndView uploadFileAction(@RequestParam("uploadFile") MultipartFile uploadFile, @RequestParam("id") Long id) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("uploadAndDownload");
-        InputStream fis = null;
-        OutputStream outputStream = null;
-        try {
-            fis = uploadFile.getInputStream();
-            outputStream = new FileOutputStream("G:\\uploadfile\\" + uploadFile.getOriginalFilename());
-            IOUtils.copy(fis, outputStream);
-            modelAndView.addObject("sucess", "上传成功");
-            return modelAndView;
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (outputStream != null) {
-                try {
-                    outputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        modelAndView.addObject("sucess", "上传失败!");
-        return modelAndView;
-    }
-
-    /*支持采纳数的下载*/
-    @RequestMapping("downloadFileAction")
-    public void downloadFileAction(HttpServletRequest request, HttpServletResponse response) {
-        response.setCharacterEncoding(request.getCharacterEncoding());
-        response.setContentType("application/octet-stream");
-        FileInputStream fis = null;
-        try {
-            File file = new File("G:\\config.ini");
-            fis = new FileInputStream(file);
-            response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
-            IOUtils.copy(fis, response.getOutputStream());
-            response.flushBuffer();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
 
     }
 
