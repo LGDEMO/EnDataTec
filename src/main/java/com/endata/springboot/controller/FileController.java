@@ -13,9 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author ligang
@@ -39,10 +37,12 @@ public class FileController {
     }
 
     /*   文件的上传*/
-    @RequestMapping(value = "/file/uploadFileAction", method = RequestMethod.GET)
-    public String upload(@RequestParam("uploadFile") MultipartFile file, @RequestParam("title") String title, @RequestParam("detail") String detail, @RequestParam("type") String type) throws ParseException {
+    @RequestMapping(value = "/file/uploadFileAction", method = RequestMethod.POST)
+    public Map upload(@RequestParam("uploadFile") MultipartFile file, @RequestParam("title") String title, @RequestParam("detail") String detail, @RequestParam("type") String type) throws ParseException {
         if (file.isEmpty()) {
-            return "文件为空";
+            Map resultMap = new HashMap<>();
+            resultMap.put("return_code",0);
+            return resultMap;
         }
         FileData fileData = new FileData();
 
@@ -63,9 +63,6 @@ public class FileController {
             fileData.setDate(newDate.getNewDate());
         }
         try {
-            if (file.isEmpty()) {
-                return "文件为空";
-            }
             /* // 获取文件名*/
             String fileName = file.getOriginalFilename();
             fileData.setUrl(fileName);
@@ -84,18 +81,20 @@ public class FileController {
                 dest.getParentFile().mkdirs();/*// 新建文件夹*/
             }
             file.transferTo(dest);/*// 文件写入*/
-            return "上传成功";
+
         } catch (IllegalStateException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "上传失败";
+        Map resultMap = new HashMap<>();
+        resultMap.put("return_code",200);
+        return  resultMap;
     }
 
     /*   文件的下载*/
     @GetMapping(value = "/file/downloadFileAction")
-    public String downloadFile(HttpServletRequest request, HttpServletResponse response, @RequestParam("fileName") String fileStringName) {
+    public Map downloadFile(HttpServletRequest request, HttpServletResponse response, @RequestParam("fileName") String fileStringName) {
         if (fileStringName != null && fileStringName.length()!= 0) {
             String fileName = fileStringName;// 文件名
             //设置文件路径
@@ -115,7 +114,9 @@ public class FileController {
                         os.write(buffer, 0, i);
                         i = bis.read(buffer);
                     }
-                    return "下载成功";
+                    Map resultMap = new HashMap<>();
+                    resultMap.put("return_code",200);
+                    return resultMap;
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
@@ -136,7 +137,9 @@ public class FileController {
                 }
             }
         }
-        return "下载失败";
+        Map resultMap = new HashMap<>();
+        resultMap.put("return_code",0);
+        return resultMap;
     }
 
 }
