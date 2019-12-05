@@ -51,7 +51,7 @@ public class FileController {
 
     /*   文件的上传*/
     @RequestMapping(value = "/file/uploadFileAction", method = RequestMethod.POST)
-    public Map upload(@RequestParam("uploadFile") MultipartFile file, @RequestParam("title") String title, @RequestParam("detail") String detail, @RequestParam("type") String type) throws ParseException {
+    public Map upload(@RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam("detail") String detail, @RequestParam("type") String type) throws ParseException {
         if (file.isEmpty()) {
             Map resultMap = new HashMap<>();
             resultMap.put("return_code",0);
