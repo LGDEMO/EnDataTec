@@ -19,5 +19,5 @@ public interface FileDataMapper {
     int updateByPrimaryKeySelective(FileData record);
 
     int updateByPrimaryKey(FileData record);
-    List<FileData> getFileData();
+    List<FileData> getFileData(String type);
 }

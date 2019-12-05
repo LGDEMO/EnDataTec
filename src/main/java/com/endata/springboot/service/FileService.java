@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface FileService {
 
-    List<FileData>  getFileData();//获取文件数据
+    List<FileData>  getFileData(String type);//获取文件数据
     int insertSelective(FileData record);//插入数据
-
+    int deleteByPrimaryKey(Integer id);//删除数据
 }

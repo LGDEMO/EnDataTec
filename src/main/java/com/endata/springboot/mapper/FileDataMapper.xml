@@ -22,16 +22,18 @@
   </select>
 
   <!--获取文件数据-->
-  <select id="getFileData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="getFileData" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from file
+    from file where type = #{type,jdbcType=VARCHAR}
   </select>
+
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from file
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.endata.springboot.model.FileData">
     insert into file (id, title, type, 
       detail, date, url

@@ -20,12 +20,17 @@ public class FileServiceImpl implements FileService {
      private FileDataMapper fileDataMapper;
 
     @Override
-    public List<FileData> getFileData() {
-        return fileDataMapper.getFileData();
+    public List<FileData> getFileData(String type) {
+        return fileDataMapper.getFileData(type);
     }
 
     @Override
     public int insertSelective(FileData record) {
         return fileDataMapper.insertSelective(record);
+    }
+
+    @Override
+    public int deleteByPrimaryKey(Integer id) {
+        return fileDataMapper.deleteByPrimaryKey(id);
     }
 }

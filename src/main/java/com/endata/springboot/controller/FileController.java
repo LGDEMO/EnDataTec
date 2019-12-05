@@ -30,10 +30,23 @@ public class FileController {
 
     /*   文件列表的获取*/
     @GetMapping("/file/getFileData")
-    public List<FileData> getFileData() {
+    public Map getFileData(@RequestParam("type") String type) {
+        Map resultMap = new HashMap<>();
         List<FileData> fileList = new ArrayList<>();
-        fileList = fileService.getFileData();
-        return fileList;
+        fileList = fileService.getFileData(type);
+        resultMap.put("return_code",200);
+        resultMap.put("FileList",fileList);
+        return resultMap;
+    }
+
+    /*   文件列表的删除*/
+    @GetMapping("/file/deleteFileData")
+    public  Map  deleteFileData(@RequestParam("id") Integer id){
+        Map resultMap = new HashMap<>();
+       int  number =  fileService.deleteByPrimaryKey(id);
+        resultMap.put("return_code",200);
+        resultMap.put("return_data","删除了："+number+"数据");
+        return resultMap;
     }
 
     /*   文件的上传*/
