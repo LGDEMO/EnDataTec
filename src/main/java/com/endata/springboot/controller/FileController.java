@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.util.*;
 
@@ -107,14 +108,14 @@ public class FileController {
 
     /*   文件的下载*/
     @GetMapping(value = "/file/downloadFileAction")
-    public Map downloadFile(HttpServletRequest request, HttpServletResponse response, @RequestParam("fileName") String fileStringName) {
+    public Map downloadFile(HttpServletRequest request, HttpServletResponse response, @RequestParam("fileName") String fileStringName) throws UnsupportedEncodingException {
         if (fileStringName != null && fileStringName.length()!= 0) {
             String fileName = fileStringName;// 文件名
             //设置文件路径
             File file = new File("D://Downloads/" + fileName);
             if (file.exists()) {
                 response.setContentType("application/force-download");// 设置强制下载不打开
-                response.addHeader("Content-Disposition", "attachment;fileName=" + fileName);// 设置文件名
+                response.addHeader("Content-Disposition", "attachment;fileName=" + URLEncoder.encode(fileName, "utf-8"));// 设置文件名
                 byte[] buffer = new byte[1024];
                 FileInputStream fis = null;
                 BufferedInputStream bis = null;
@@ -127,6 +128,7 @@ public class FileController {
                         os.write(buffer, 0, i);
                         i = bis.read(buffer);
                     }
+
                     Map resultMap = new HashMap<>();
                     resultMap.put("return_code",200);
                     return resultMap;
