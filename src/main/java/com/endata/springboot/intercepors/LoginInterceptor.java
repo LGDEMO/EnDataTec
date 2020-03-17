@@ -4,7 +4,8 @@ import com.endata.springboot.model.User;
 import com.endata.springboot.service.UserService;
 import com.endata.springboot.util.JWTUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.istack.internal.Nullable;
+
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;

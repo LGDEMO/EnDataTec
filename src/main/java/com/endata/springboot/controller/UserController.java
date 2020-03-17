@@ -43,7 +43,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @CrossOrigin(origins="http://localhost:8080",maxAge = 3600)
+   /* @CrossOrigin(origins="http://localhost:8080",maxAge = 3600)*/
     @PostMapping("user/login")
     public  ResponseBean  login(@RequestBody User user, HttpServletResponse response, HttpServletRequest request) throws UnsupportedEncodingException {
         request.setCharacterEncoding("utf-8");//对request传过来的参数设置编码格式，以免传入中文的时候出现问题，必须在request.getParameter之前设置
