@@ -34,7 +34,7 @@ public class AirController {
 
 
 /*获取空气数据*/
-@CrossOrigin(origins="http://localhost:8080",maxAge = 3600)
+/*@CrossOrigin(origins="http://localhost:8080",maxAge = 3600)*/
      @GetMapping("air/getAirData")
       public Map getAirData(@RequestParam("city_code") Integer cityCode){
          Map<String, List<Air>> map = new HashMap<String, List<Air>>();

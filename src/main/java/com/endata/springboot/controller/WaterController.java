@@ -56,7 +56,7 @@ public class WaterController {
         return map;
     }
 
-    @CrossOrigin(origins="http://localhost:8080",maxAge = 3600)
+   /* @CrossOrigin(origins="http://localhost:8080",maxAge = 3600)*/
     @PostMapping("water/calWaterData")
      public  Map calWaterData(@RequestBody Water water) throws ParseException {
         Map<String, Float> resultMap =  new HashMap<String,Float>();

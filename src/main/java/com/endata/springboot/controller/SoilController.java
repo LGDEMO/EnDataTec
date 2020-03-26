@@ -33,7 +33,7 @@ import java.util.Map;
     @Autowired
     private NameByCode nameByCode;
     /*获取土壤数据*/
-    @CrossOrigin(origins="http://localhost:8080",maxAge = 3600)
+   /* @CrossOrigin(origins="http://localhost:8080",maxAge = 3600)*/
     @GetMapping("/soil/getSoilData")
     public Map getSoilData(@RequestParam("city_code") Integer cityCode){
         Map<String, List<Soil>> map = new HashMap<String, List<Soil>>();
