@@ -18,7 +18,7 @@
 
         <!-- 配置数据库连接信息 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/endata"
+                        connectionURL="jdbc:mysql://182.92.155.51:3306/endata"
                         userId="root"
                         password="123456">
         </jdbcConnection>
